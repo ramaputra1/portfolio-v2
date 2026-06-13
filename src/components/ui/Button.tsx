@@ -18,6 +18,7 @@ interface ButtonBaseProps {
 
 type ButtonAsAnchorProps = ButtonBaseProps & {
   href: string;
+  download?: AnchorHTMLAttributes<HTMLAnchorElement>["download"];
   target?: AnchorHTMLAttributes<HTMLAnchorElement>["target"];
   rel?: string;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
@@ -49,6 +50,7 @@ export function Button(props: ButtonProps) {
     return (
       <a
         href={props.href}
+        download={props.download}
         target={props.target}
         rel={props.rel}
         onClick={props.onClick}
