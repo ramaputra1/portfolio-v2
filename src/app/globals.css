@@ -23,6 +23,7 @@
 
   /* Fonts */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-handwriting: var(--font-caveat), cursive;
 }
 
 html {
@@ -34,6 +35,14 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Hide marker leader lines and pills on small screens */
+@media (max-width: 767px) {
+  [data-marker-line],
+  [data-marker-pill] {
+    display: none !important;
+  }
 }
 
 .space-gradient {
