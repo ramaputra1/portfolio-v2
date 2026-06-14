@@ -143,10 +143,10 @@ function HelloWorldRipple({
 
   return (
     <div
-      className="hero-hello pointer-events-auto absolute right-3 top-[4.25rem] z-[2] -rotate-3 cursor-default select-none whitespace-nowrap sm:left-[72%] sm:right-auto sm:top-[28%] sm:-translate-x-1/2 sm:-translate-y-1/2 lg:top-[20%]"
+      className="hero-hello pointer-events-auto absolute right-3 top-[4.25rem] z-3 -rotate-3 cursor-default select-none whitespace-nowrap sm:left-[72%] sm:right-auto sm:top-[28%] sm:-translate-x-1/2 sm:-translate-y-1/2 lg:top-[20%]"
       style={{
         fontSize: isCompact
-          ? "clamp(1.35rem, 6.4vw, 1.75rem)"
+          ? "clamp(0.95rem, 4.5vw, 1.2rem)"
           : "clamp(2rem, 4.5vw, 3.8rem)",
         opacity,
         color: "#ffffff",
@@ -289,6 +289,7 @@ export function Globe() {
   const canvasH = size.h * (isCompact ? 1.08 : isTablet ? 1.18 : 1.3);
 
   return (
+    <>
     <div
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-0"
@@ -310,10 +311,6 @@ export function Globe() {
             reducedMotion={reducedMotion}
           />
         </div>
-      )}
-
-      {size.w > 0 && (
-        <HelloWorldRipple opacity={globeOpacity} isCompact={isCompact} />
       )}
 
       {/* Drag hint — visible until user drags, hidden forever after */}
@@ -370,5 +367,11 @@ export function Globe() {
         }}
       />
     </div>
+
+    {/* HelloWorldRipple outside z-0 wrapper so it sits above the mobile dark scrim (z-[2]) */}
+    {size.w > 0 && (
+      <HelloWorldRipple opacity={globeOpacity} isCompact={isCompact} />
+    )}
+    </>
   );
 }

@@ -40,11 +40,20 @@ export function Hero() {
       {/* Full-bleed globe — anchored bottom-right, behind everything */}
       <Globe />
 
+      {/* Mobile-only dark scrim — globe bleeds fully behind text on small screens */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[2] sm:hidden"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(8,13,25,0.82) 0%, rgba(8,13,25,0.70) 60%, rgba(8,13,25,0.20) 100%)",
+        }}
+      />
+
       {/* Left-column text content */}
       <div className="pointer-events-none relative z-10 mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl items-start px-4 py-10 sm:px-6 sm:py-14 md:items-center md:py-20">
-        {/* Subtle scrim so text stays readable over the globe */}
+        {/* Desktop scrim so text stays readable over the globe */}
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-full md:w-2/3"
+          className="pointer-events-none absolute inset-y-0 left-0 hidden w-2/3 sm:block md:w-2/3"
           style={{
             background:
               "radial-gradient(ellipse at 0% 50%, rgba(10,15,30,0.55) 0%, transparent 70%)",
@@ -57,7 +66,7 @@ export function Hero() {
             Rama Putra
           </h1>
           <p
-            className="shimmer-text mt-2 max-w-full bg-clip-text text-4xl font-bold tracking-normal text-balance text-transparent sm:text-5xl md:text-5xl"
+            className="shimmer-text mt-2 max-w-full bg-clip-text text-3xl font-bold tracking-normal text-balance text-transparent sm:text-5xl md:text-5xl"
             style={{
               backgroundImage:
                 "linear-gradient(90deg, #22d3ee, #3b82f6, #6366f1, #8b5cf6, #22d3ee)",
