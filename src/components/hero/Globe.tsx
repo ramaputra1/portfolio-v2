@@ -10,8 +10,8 @@ const GlobeInner = dynamic(() => import("./GlobeInner"), {
 });
 
 const LETTERS = "Hello World".split("");
-const REPEL_RADIUS = 90; // px — how far the cursor triggers movement
-const REPEL_STRENGTH = 32; // px — max displacement
+const REPEL_RADIUS = 90;   // px — how far the cursor triggers movement
+const REPEL_STRENGTH = 20; // px — hard ceiling on vertical displacement
 
 const SPRING_BACK = {
   type: "spring",
@@ -28,70 +28,96 @@ function HelloWorldRipple({
   isCompact: boolean;
 }) {
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const isMounted = useRef(false);
+
   // motionValue is a plain function (not a hook) — safe in useState lazy init
   const [mv] = useState<{ x: MotionValue<number>; y: MotionValue<number> }[]>(
     () => LETTERS.map(() => ({ x: motionValue(0), y: motionValue(0) })),
   );
 
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+      // Snap all letters back instantly on unmount to avoid stale animate() calls
+      mv.forEach(({ x, y }) => {
+        x.set(0);
+        y.set(0);
+      });
+    };
+  }, [mv]);
+
   const springBack = (i: number) => {
-    animate(mv[i].x, 0, SPRING_BACK);
-    animate(mv[i].y, 0, SPRING_BACK);
+    if (!isMounted.current) return;
+    const entry = mv[i];
+    // MotionValue is always an object — check it exists and has x/y
+    if (!entry || typeof entry.x?.set !== "function") return;
+    animate(entry.x, 0, SPRING_BACK);
+    animate(entry.y, 0, SPRING_BACK);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    letterRefs.current.forEach((el, i) => {
-      if (!el) return;
+    if (isCompact) return;
+    for (let i = 0; i < LETTERS.length; i++) {
+      const el = letterRefs.current[i];
+      const entry = mv[i];
+      if (!el || typeof entry?.x?.set !== "function") continue;
       const rect = el.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
       const dx = e.clientX - cx;
       const dy = e.clientY - cy;
       const dist = Math.hypot(dx, dy);
-
       if (dist < REPEL_RADIUS && dist > 0) {
-        const force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH;
-        mv[i].x.set((-dx / dist) * force);
-        mv[i].y.set((-dy / dist) * force);
+        const raw = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH;
+        const clampedY = Math.max(-REPEL_STRENGTH, Math.min(REPEL_STRENGTH, (-dy / dist) * raw));
+        entry.x.set(0);          // horizontal movement locked out
+        entry.y.set(clampedY);   // vertical only, capped at ±REPEL_STRENGTH
       } else {
         springBack(i);
       }
-    });
+    }
   };
 
   const handleMouseLeave = () => {
-    LETTERS.forEach((_, i) => springBack(i));
+    if (isCompact) return;
+    for (let i = 0; i < LETTERS.length; i++) springBack(i);
   };
 
   return (
     <div
-      className="hero-hello pointer-events-auto absolute left-[72%] top-[28%] z-[2] hidden -translate-x-1/2 -translate-y-1/2 -rotate-3 cursor-default select-none whitespace-nowrap sm:block lg:top-[20%]"
+      className="hero-hello pointer-events-auto absolute right-3 top-[4.25rem] z-[2] -rotate-3 cursor-default select-none whitespace-nowrap sm:left-[72%] sm:right-auto sm:top-[28%] sm:-translate-x-1/2 sm:-translate-y-1/2 lg:top-[20%]"
       style={{
         fontSize: isCompact
-          ? "clamp(1.75rem, 11vw, 3rem)"
+          ? "clamp(1.35rem, 6.4vw, 1.75rem)"
           : "clamp(2rem, 4.5vw, 3.8rem)",
         opacity,
         transition: "opacity 3s ease",
-        padding: isCompact ? "1rem" : "1.5rem",
+        padding: isCompact ? "0.45rem" : "1.5rem",
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {LETTERS.map((letter, i) => (
-        <motion.span
-          key={i}
-          ref={(el) => {
-            letterRefs.current[i] = el;
-          }}
-          style={{
-            display: "inline-block",
-            whiteSpace: "pre",
-            x: mv[i].x,
-            y: mv[i].y,
-          }}
-        >
-          {letter}
-        </motion.span>
-      ))}
+      {isCompact
+        ? "Hello World"
+        : LETTERS.map((letter, i) => (
+            <motion.span
+              key={i}
+              ref={(el) => {
+                letterRefs.current[i] = el;
+              }}
+              style={{
+                display: "inline-block",
+                whiteSpace: "pre",
+                // Pass the MotionValue directly — never fall back to a raw number
+                // (passing 0 to FM v12's x/y style prop causes an internal .x read error)
+                x: mv[i]?.x,
+                y: mv[i]?.y,
+              }}
+            >
+              {letter}
+            </motion.span>
+          ))}
     </div>
   );
 }
