@@ -65,7 +65,7 @@ export function Hero() {
           >
             Enterprise Full Stack Developer
           </p>
-          <p className="mt-6 max-w-md text-base leading-7 text-text-muted sm:text-lg">
+          <p className="mt-6 max-w-md text-base leading-7 text-text sm:text-lg">
             Build a full-stack Software and Automated solutions. Experienced in
             Enterprise Systems serving 3,500+ users. Turn ideas to reality
             through code.
