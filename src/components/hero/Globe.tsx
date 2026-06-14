@@ -187,6 +187,7 @@ export function Globe() {
   const [gradientOpacity, setGradientOpacity] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [globeOpacity, setGlobeOpacity] = useState(0);
+  const [hasDragged, setHasDragged] = useState(false);
 
   useEffect(() => {
     const onResize = () =>
@@ -263,6 +264,25 @@ export function Globe() {
     return () => clearTimeout(id);
   }, [size.w]);
 
+  useEffect(() => {
+    const el = globeHitAreaRef.current;
+    if (!el) return;
+    let down = false;
+    const onDown = () => { down = true; };
+    const onMove = () => { if (down) setHasDragged(true); };
+    const onUp = () => { down = false; };
+    el.addEventListener("pointerdown", onDown);
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerup", onUp);
+    el.addEventListener("pointercancel", onUp);
+    return () => {
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerup", onUp);
+      el.removeEventListener("pointercancel", onUp);
+    };
+  }, [size.w]);
+
   const isCompact = size.w > 0 && size.w < 640;
   const isTablet = size.w >= 640 && size.w < 1024;
   const canvasW = size.w * (isCompact ? 1.35 : isTablet ? 1.42 : 1.5);
@@ -294,6 +314,49 @@ export function Globe() {
 
       {size.w > 0 && (
         <HelloWorldRipple opacity={globeOpacity} isCompact={isCompact} />
+      )}
+
+      {/* Drag hint — visible until user drags, hidden forever after */}
+      {size.w > 0 && !isCompact && (
+        <div
+          className="pointer-events-none absolute"
+          style={{
+            left: "66%",
+            top: "52%",
+            transform: "translate(-50%, -50%)",
+            opacity: hasDragged ? 0 : globeOpacity,
+            transition: "opacity 0.7s ease",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          {/* Pulse ring */}
+          <div
+            style={{
+              width: 80,
+              height: 80,
+              borderRadius: "50%",
+              border: "1.5px solid rgba(255,255,255,0.35)",
+              animation: "drag-hint-pulse 2.4s ease-in-out infinite",
+            }}
+          />
+          {/* Label */}
+          <span
+            style={{
+              color: "rgba(255,255,255,0.75)",
+              fontSize: "0.72rem",
+              fontWeight: 500,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              textShadow: "0 1px 6px rgba(0,0,0,0.6)",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Drag to rotate
+          </span>
+        </div>
       )}
 
       {/* Scroll dissolve into next section */}
