@@ -32,13 +32,15 @@ export function Hero() {
         ))}
       </div>
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-44 bg-linear-to-b from-transparent via-bg/65 to-bg"
-      />
-
       {/* Full-bleed globe — anchored bottom-right, behind everything */}
       <Globe />
+
+      {/* Bottom dissolve — tall enough that the fade spans a meaningful scroll distance */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-[55vh]"
+        style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(10,15,30,0.92) 100%)" }}
+      />
 
       {/* Mobile-only dark scrim — globe bleeds fully behind text on small screens */}
       <div

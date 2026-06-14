@@ -21,6 +21,12 @@ import {
 
 export function About() {
   return (
+    <div className="space-gradient relative">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-1 h-40"
+        style={{ background: "linear-gradient(to bottom, rgba(10,15,30,0.9) 0%, transparent 100%)" }}
+      />
     <Section id="about">
       <SectionHeader label="ABOUT ME" title="Get to know me better" />
 
@@ -96,5 +102,6 @@ export function About() {
         </InfoCard>
       </div>
     </Section>
+    </div>
   );
 }
