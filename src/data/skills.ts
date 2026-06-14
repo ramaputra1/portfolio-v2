@@ -1,7 +1,7 @@
 import type { InfoBlock, TechItem } from "@/types";
 
 export const bio =
-  "Computer Science student at BYU-Hawaii passionate about building impactful digital solutions and continuous learning.";
+  "Hello World! I am Rama Adi Putra, I was born and raised in Surakarta, Indonesia. Currently, I am doing my study in BYU-Hawaii University since Winter 2024. I planned to finish my study in 4 years. I am majoring in Computer Science, minoring in Visual Art & Marketing. Formed by my B.S. and Certificate, I specialize as a Website App Fullstack Developer, expertise in designing websites, optimizing UX/UI, and strategically marketing website & digital products to the market. I am a lifetime learner with a passion to exploring the creative side of technology. I am looking for any oportunity to collabs with everyone in purpose to create a creative technology or projects in programming field.";
 
 export const education: InfoBlock = {
   primary: "BYU-Hawaii",
