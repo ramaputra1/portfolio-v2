@@ -2,24 +2,93 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
+import { motion, motionValue, animate, type MotionValue } from "framer-motion";
 
 const GlobeInner = dynamic(() => import("./GlobeInner"), {
   ssr: false,
   loading: () => null,
 });
 
+const LETTERS = "Hello World".split("");
+const REPEL_RADIUS = 90;   // px — how far the cursor triggers movement
+const REPEL_STRENGTH = 32; // px — max displacement
+
+const SPRING_BACK = { type: "spring", stiffness: 50, damping: 18, mass: 0.9 } as const;
+
+function HelloWorldRipple({ opacity }: { opacity: number }) {
+  const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  // motionValue is a plain function (not a hook) — safe in useState lazy init
+  const [mv] = useState<{ x: MotionValue<number>; y: MotionValue<number> }[]>(() =>
+    LETTERS.map(() => ({ x: motionValue(0), y: motionValue(0) })),
+  );
+
+  const springBack = (i: number) => {
+    animate(mv[i].x, 0, SPRING_BACK);
+    animate(mv[i].y, 0, SPRING_BACK);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    letterRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist < REPEL_RADIUS && dist > 0) {
+        const force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH;
+        mv[i].x.set((-dx / dist) * force);
+        mv[i].y.set((-dy / dist) * force);
+      } else {
+        springBack(i);
+      }
+    });
+  };
+
+  const handleMouseLeave = () => {
+    LETTERS.forEach((_, i) => springBack(i));
+  };
+
+  return (
+    <div
+      className="hero-hello pointer-events-auto absolute left-[72%] top-[20%] z-2 -translate-x-1/2 -translate-y-1/2 -rotate-3 cursor-default select-none"
+      style={{
+        fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
+        opacity,
+        transition: "opacity 3s ease",
+        padding: "1.5rem",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {LETTERS.map((letter, i) => (
+        <motion.span
+          key={i}
+          ref={(el) => {
+            letterRefs.current[i] = el;
+          }}
+          style={{ display: "inline-block", whiteSpace: "pre", x: mv[i].x, y: mv[i].y }}
+        >
+          {letter}
+        </motion.span>
+      ))}
+    </div>
+  );
+}
+
 export function Globe() {
-  // Both initialise to zero/false — identical on server and client.
-  // The effects update them after hydration.
   const globeHitAreaRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [gradientOpacity, setGradientOpacity] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [globeOpacity, setGlobeOpacity] = useState(0);
 
   useEffect(() => {
     const onResize = () =>
       setSize({ w: window.innerWidth, h: window.innerHeight });
-    onResize(); // initial read — inside a callback, not bare in the effect body
+    onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
@@ -28,12 +97,11 @@ export function Globe() {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onMotion = (e?: MediaQueryListEvent) =>
       setReducedMotion(e ? e.matches : mq.matches);
-    onMotion(); // initial read
+    onMotion();
     mq.addEventListener("change", onMotion);
     return () => mq.removeEventListener("change", onMotion);
   }, []);
 
-  // Scroll-linked gradient dissolve
   useEffect(() => {
     let rafId: number;
     const onScroll = () => {
@@ -41,7 +109,7 @@ export function Globe() {
       rafId = requestAnimationFrame(() => {
         const progress = Math.min(
           1,
-          window.scrollY / (window.innerHeight * 0.8)
+          window.scrollY / (window.innerHeight * 0.1),
         );
         setGradientOpacity(progress);
       });
@@ -77,19 +145,17 @@ export function Globe() {
     return () => {
       observer.disconnect();
       canvases.forEach((canvas) => {
-        canvas.removeEventListener(
-          "contextmenu",
-          allowBrowserContextMenu,
-          true,
-        );
+        canvas.removeEventListener("contextmenu", allowBrowserContextMenu, true);
       });
     };
   }, [size.w]);
 
-  // Canvas is 1.5× wide and 1.3× tall, anchored top-left.
-  // The hero section's overflow-hidden clips the right/bottom bleed.
-  // Globe sphere center lands at ~75 % from left and ~65 % from top —
-  // the bottom-right-corner feel the user wants.
+  useEffect(() => {
+    if (size.w === 0) return;
+    const id = setTimeout(() => setGlobeOpacity(1), 30);
+    return () => clearTimeout(id);
+  }, [size.w]);
+
   const canvasW = size.w * 1.5;
   const canvasH = size.h * 1.3;
 
@@ -102,7 +168,12 @@ export function Globe() {
         <div
           ref={globeHitAreaRef}
           className="pointer-events-auto absolute left-0 top-0"
-          style={{ width: canvasW, height: canvasH }}
+          style={{
+            width: canvasW,
+            height: canvasH,
+            opacity: globeOpacity,
+            transition: "opacity 3s ease",
+          }}
         >
           <GlobeInner
             width={canvasW}
@@ -112,12 +183,13 @@ export function Globe() {
         </div>
       )}
 
+      {size.w > 0 && <HelloWorldRipple opacity={globeOpacity} />}
+
       {/* Scroll dissolve into next section */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            "linear-gradient(to bottom, transparent 0%, #0a0f1e 100%)",
+          background: "linear-gradient(to bottom, transparent 0%, #0a0f1e 100%)",
           opacity: gradientOpacity,
           transition: "opacity 0.05s linear",
         }}
