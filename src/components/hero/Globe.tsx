@@ -2,7 +2,13 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { motion, motionValue, animate, type MotionValue } from "framer-motion";
+import {
+  motion,
+  motionValue,
+  animate,
+  type MotionValue,
+  type AnimationPlaybackControls,
+} from "framer-motion";
 
 const GlobeInner = dynamic(() => import("./GlobeInner"), {
   ssr: false,
@@ -10,15 +16,13 @@ const GlobeInner = dynamic(() => import("./GlobeInner"), {
 });
 
 const LETTERS = "Hello World".split("");
-const REPEL_RADIUS = 90;   // px — how far the cursor triggers movement
-const REPEL_STRENGTH = 20; // px — hard ceiling on vertical displacement
+const REPEL_RADIUS = 140;  // px — wider zone = more sensitive
+const REPEL_STRENGTH = 22; // px — hard ceiling on vertical displacement
 
-const SPRING_BACK = {
-  type: "spring",
-  stiffness: 50,
-  damping: 18,
-  mass: 0.9,
-} as const;
+// Fast spring: letter smoothly chases the cursor target
+const SPRING_FORWARD = { type: "spring", stiffness: 320, damping: 28, mass: 0.5 } as const;
+// Slow spring: letter drifts lazily back to rest when cursor leaves
+const SPRING_BACK = { type: "spring", stiffness: 38, damping: 14, mass: 1.2 } as const;
 
 function HelloWorldRipple({
   opacity,
@@ -29,6 +33,9 @@ function HelloWorldRipple({
 }) {
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const isMounted = useRef(false);
+  const animRef = useRef<(AnimationPlaybackControls | null)[]>(
+    LETTERS.map(() => null),
+  );
 
   // motionValue is a plain function (not a hook) — safe in useState lazy init
   const [mv] = useState<{ x: MotionValue<number>; y: MotionValue<number> }[]>(
@@ -37,23 +44,21 @@ function HelloWorldRipple({
 
   useEffect(() => {
     isMounted.current = true;
+    const anims = animRef.current;
     return () => {
       isMounted.current = false;
-      // Snap all letters back instantly on unmount to avoid stale animate() calls
-      mv.forEach(({ x, y }) => {
-        x.set(0);
-        y.set(0);
-      });
+      anims.forEach((ctrl) => ctrl?.stop());
+      mv.forEach(({ x, y }) => { x.set(0); y.set(0); });
     };
   }, [mv]);
 
   const springBack = (i: number) => {
     if (!isMounted.current) return;
     const entry = mv[i];
-    // MotionValue is always an object — check it exists and has x/y
-    if (!entry || typeof entry.x?.set !== "function") return;
-    animate(entry.x, 0, SPRING_BACK);
-    animate(entry.y, 0, SPRING_BACK);
+    if (!entry || typeof entry.y?.set !== "function") return;
+    animRef.current[i]?.stop();
+    animRef.current[i] = animate(entry.y, 0, SPRING_BACK);
+    entry.x.set(0);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -61,7 +66,7 @@ function HelloWorldRipple({
     for (let i = 0; i < LETTERS.length; i++) {
       const el = letterRefs.current[i];
       const entry = mv[i];
-      if (!el || typeof entry?.x?.set !== "function") continue;
+      if (!el || typeof entry?.y?.set !== "function") continue;
       const rect = el.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
@@ -70,9 +75,11 @@ function HelloWorldRipple({
       const dist = Math.hypot(dx, dy);
       if (dist < REPEL_RADIUS && dist > 0) {
         const raw = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH;
-        const clampedY = Math.max(-REPEL_STRENGTH, Math.min(REPEL_STRENGTH, (-dy / dist) * raw));
-        entry.x.set(0);          // horizontal movement locked out
-        entry.y.set(clampedY);   // vertical only, capped at ±REPEL_STRENGTH
+        const target = Math.max(-REPEL_STRENGTH, Math.min(REPEL_STRENGTH, (-dy / dist) * raw));
+        // Cancel previous animation and spring toward the new target
+        animRef.current[i]?.stop();
+        animRef.current[i] = animate(entry.y, target, SPRING_FORWARD);
+        entry.x.set(0);
       } else {
         springBack(i);
       }
