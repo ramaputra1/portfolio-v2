@@ -21,7 +21,30 @@ import {
 
 export function About() {
   return (
-    <div className="space-gradient relative">
+    <div className="space-gradient relative overflow-hidden">
+      {/* Stars — matching Hero aesthetic */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        {[
+          "left-[5%] top-[8%] size-1 opacity-40",
+          "left-[14%] top-[55%] size-0.5 opacity-30",
+          "left-[28%] top-[18%] size-1 opacity-50",
+          "left-[50%] top-[6%] size-0.5 opacity-30",
+          "left-[62%] top-[72%] size-1 opacity-40",
+          "left-[75%] top-[33%] size-1.5 opacity-20",
+          "right-[8%] top-[12%] size-1 opacity-50",
+          "right-[18%] top-[60%] size-0.5 opacity-40",
+          "right-[32%] top-[88%] size-1 opacity-30",
+          "right-[5%] bottom-[20%] size-1.5 opacity-20",
+          "left-[40%] bottom-[15%] size-0.5 opacity-40",
+          "left-[88%] top-[48%] size-1 opacity-30",
+        ].map((cls) => (
+          <span
+            key={cls}
+            className={`absolute rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.5)] ${cls}`}
+          />
+        ))}
+      </div>
+
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 z-1 h-40"
@@ -50,42 +73,42 @@ export function About() {
         {/* Card grid */}
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {/* Education */}
-          <InfoCard icon={<GraduationCap size={18} />} title="Education">
+          <InfoCard color="#06b6d4" icon={<GraduationCap size={18} />} title="Education">
             <p className="font-bold text-text">{education.primary}</p>
             <p>{education.secondary}</p>
             <p>{education.tertiary}</p>
           </InfoCard>
 
           {/* Experience */}
-          <InfoCard icon={<Briefcase size={18} />} title="Experience">
+          <InfoCard color="#3b82f6" icon={<Briefcase size={18} />} title="Experience">
             <p className="font-bold text-text">{experience.primary}</p>
             <p>{experience.secondary}</p>
             <p>{experience.tertiary}</p>
           </InfoCard>
 
           {/* Skills */}
-          <InfoCard icon={<Code2 size={18} />} title="Skills">
+          <InfoCard color="#22c55e" icon={<Code2 size={18} />} title="Skills">
             {skills.map((s) => (
               <p key={s}>{s}</p>
             ))}
           </InfoCard>
 
           {/* Certificates */}
-          <InfoCard icon={<Award size={18} />} title="Certificates">
+          <InfoCard color="#f59e0b" icon={<Award size={18} />} title="Certificates">
             {certificates.map((c) => (
               <p key={c}>{c}</p>
             ))}
           </InfoCard>
 
           {/* GitHub Stats */}
-          <InfoCard icon={<GitBranch size={18} />} title="GitHub Stats">
+          <InfoCard color="#a855f7" icon={<GitBranch size={18} />} title="GitHub Stats">
             {githubStats.map((g) => (
               <p key={g}>{g}</p>
             ))}
           </InfoCard>
 
           {/* Tech Stack */}
-          <InfoCard icon={<Layers size={18} />} title="Tech Stack">
+          <InfoCard color="#ec4899" icon={<Layers size={18} />} title="Tech Stack">
             <div className="flex flex-wrap gap-3 pt-1">
               {techStack.map(({ name, icon }) => (
                 <div
