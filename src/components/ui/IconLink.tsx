@@ -20,7 +20,7 @@ export function IconLink({
     <a
       href={href}
       className={cn(
-        "inline-flex items-center gap-2 text-text-muted transition-colors hover:text-text",
+        "inline-flex items-center gap-2 whitespace-nowrap text-text-muted transition-colors hover:text-text",
         className,
       )}
       {...props}
