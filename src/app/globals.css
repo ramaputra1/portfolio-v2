@@ -31,7 +31,12 @@ html {
 }
 
 body {
-  background-color: var(--color-bg);
+  background: linear-gradient(
+    180deg,
+    rgba(10, 15, 30, 0.98) 0%,
+    rgba(8, 14, 27, 1) 55%,
+    rgba(10, 15, 30, 1) 100%
+  );
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -47,7 +52,22 @@ body {
 
 .space-gradient {
   background:
-    radial-gradient(ellipse at 70% 20%, rgba(59, 130, 246, 0.12), transparent 55%),
-    radial-gradient(ellipse at 30% 80%, rgba(37, 99, 235, 0.08), transparent 50%),
+    linear-gradient(
+      180deg,
+      rgba(10, 15, 30, 0.88) 0%,
+      rgba(10, 15, 30, 0.66) 52%,
+      rgba(10, 15, 30, 1) 100%
+    ),
+    radial-gradient(
+      ellipse at 74% 35%,
+      rgba(96, 165, 250, 0.18),
+      transparent 54%
+    ),
+    radial-gradient(
+      ellipse at 24% 74%,
+      rgba(37, 99, 235, 0.1),
+      transparent 56%
+    ),
     var(--color-bg);
+  background-blend-mode: normal, screen, screen, normal;
 }

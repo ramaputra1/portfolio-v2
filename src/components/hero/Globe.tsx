@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const GlobeInner = dynamic(() => import("./GlobeInner"), {
   ssr: false,
@@ -11,6 +11,7 @@ const GlobeInner = dynamic(() => import("./GlobeInner"), {
 export function Globe() {
   // Both initialise to zero/false — identical on server and client.
   // The effects update them after hydration.
+  const globeHitAreaRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [gradientOpacity, setGradientOpacity] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -52,6 +53,39 @@ export function Globe() {
     };
   }, []);
 
+  useEffect(() => {
+    const hitArea = globeHitAreaRef.current;
+    if (!hitArea) return;
+
+    const canvases = new Set<HTMLCanvasElement>();
+    const allowBrowserContextMenu = (event: Event) => {
+      event.stopImmediatePropagation();
+    };
+    const attachCanvasListeners = () => {
+      hitArea.querySelectorAll("canvas").forEach((canvas) => {
+        if (canvases.has(canvas)) return;
+        canvas.addEventListener("contextmenu", allowBrowserContextMenu, true);
+        canvases.add(canvas);
+      });
+    };
+
+    attachCanvasListeners();
+
+    const observer = new MutationObserver(attachCanvasListeners);
+    observer.observe(hitArea, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      canvases.forEach((canvas) => {
+        canvas.removeEventListener(
+          "contextmenu",
+          allowBrowserContextMenu,
+          true,
+        );
+      });
+    };
+  }, [size.w]);
+
   // Canvas is 1.5× wide and 1.3× tall, anchored top-left.
   // The hero section's overflow-hidden clips the right/bottom bleed.
   // Globe sphere center lands at ~75 % from left and ~65 % from top —
@@ -66,6 +100,7 @@ export function Globe() {
     >
       {size.w > 0 && (
         <div
+          ref={globeHitAreaRef}
           className="pointer-events-auto absolute left-0 top-0"
           style={{ width: canvasW, height: canvasH }}
         >

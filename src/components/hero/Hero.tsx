@@ -32,6 +32,11 @@ export function Hero() {
         ))}
       </div>
 
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-44 bg-linear-to-b from-transparent via-bg/65 to-bg"
+      />
+
       {/* Full-bleed globe — anchored bottom-right, behind everything */}
       <Globe />
 
@@ -47,12 +52,9 @@ export function Hero() {
         />
 
         {/* pointer-events-auto only on the actual text/buttons column */}
-        <div className="pointer-events-auto relative flex flex-col items-start">
-          <p className="mb-4 text-sm font-medium text-text-muted sm:text-base">
-            Hi there! 👋
-          </p>
-          <h1 className="text-5xl font-bold tracking-normal text-text md:text-6xl">
-            I&apos;m Rama Putra
+        <div className="pointer-events-auto relative flex flex-col items-start md:-translate-x-4 lg:-translate-x-8">
+          <h1 className="text-5xl font-bold tracking-normal text-text md:text-7xl">
+            Rama Putra
           </h1>
           <p className="mt-2 bg-linear-to-r from-primary to-primary-light bg-clip-text text-5xl font-bold tracking-normal text-transparent md:text-6xl">
             Full Stack Developer
