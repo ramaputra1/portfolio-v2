@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Inter, Pacifico } from "next/font/google";
+import { Caveat, Inter, Pacifico, Poppins } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,6 +18,13 @@ const pacifico = Pacifico({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-pacifico",
+  display: "swap",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -41,7 +48,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${caveat.variable} ${pacifico.variable}`}
+      className={`${inter.variable} ${caveat.variable} ${pacifico.variable} ${poppins.variable}`}
     >
       <body className="antialiased" suppressHydrationWarning>
         {children}

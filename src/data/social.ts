@@ -1,4 +1,8 @@
-import { GitHubIcon, LinkedInIcon, EmailIcon } from "@/components/ui/BrandIcons";
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  EmailIcon,
+} from "@/components/ui/BrandIcons";
 import type { SocialLink } from "@/types";
 
 export const socials: SocialLink[] = [
@@ -10,9 +14,9 @@ export const socials: SocialLink[] = [
   },
   {
     label: "Email",
-    href: "mailto:hello@ramabusiness321@gmail.com",
+    href: "mailto:@ramabusiness321@gmail.com",
     icon: EmailIcon,
   },
 ];
 
-export const contactEmail = "hello@ramabusiness321@gmail.com";
+export const contactEmail = "@ramabusiness321@gmail.com";

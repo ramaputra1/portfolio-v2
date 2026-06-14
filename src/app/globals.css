@@ -25,6 +25,7 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-handwriting: var(--font-caveat), cursive;
   --font-script: var(--font-pacifico), cursive;
+  --font-heading: var(--font-poppins), sans-serif;
 }
 
 .hero-hello {
@@ -34,15 +35,15 @@
   color: #ffffff;
   /* 16-layer vertical extrusion: light blue → deep navy, then soft drop shadow */
   text-shadow:
-    0  1px 0 #93c5fd,
-    0  2px 0 #7cb9fd,
-    0  3px 0 #60a5fa,
-    0  4px 0 #4b97f8,
-    0  5px 0 #3b82f6,
-    0  6px 0 #2d75ef,
-    0  7px 0 #2563eb,
-    0  8px 0 #1f58e0,
-    0  9px 0 #1d4ed8,
+    0 1px 0 #93c5fd,
+    0 2px 0 #7cb9fd,
+    0 3px 0 #60a5fa,
+    0 4px 0 #4b97f8,
+    0 5px 0 #3b82f6,
+    0 6px 0 #2d75ef,
+    0 7px 0 #2563eb,
+    0 8px 0 #1f58e0,
+    0 9px 0 #1d4ed8,
     0 10px 0 #1a46cc,
     0 11px 0 #1e40af,
     0 12px 0 #1a3a9e,
@@ -51,7 +52,7 @@
     0 15px 0 #112370,
     0 16px 0 #0f1e60,
     3px 22px 28px rgba(0, 0, 0, 0.7),
-    0  18px 18px rgba(10, 30, 80, 0.55);
+    0 18px 18px rgba(10, 30, 80, 0.55);
 }
 
 html {
@@ -87,6 +88,20 @@ body {
       0 4px 0 #2563eb,
       2px 10px 18px rgba(0, 0, 0, 0.62);
   }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-text {
+  background-size: 250% auto;
+  animation: shimmer 10s linear infinite;
 }
 
 .space-gradient {

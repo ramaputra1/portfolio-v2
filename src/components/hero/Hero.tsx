@@ -56,27 +56,29 @@ export function Hero() {
           <h1 className="text-4xl font-bold tracking-normal text-text sm:text-5xl md:text-7xl">
             Rama Putra
           </h1>
-          <p className="mt-2 max-w-full bg-linear-to-r from-primary to-primary-light bg-clip-text text-4xl font-bold tracking-normal text-balance text-transparent sm:text-5xl md:text-6xl">
-            Full Stack Developer
+          <p
+            className="shimmer-text mt-2 max-w-full bg-clip-text text-4xl font-bold tracking-normal text-balance text-transparent sm:text-5xl md:text-5xl"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, #22d3ee, #3b82f6, #6366f1, #8b5cf6, #22d3ee)",
+            }}
+          >
+            Enterprise Full Stack Developer
           </p>
           <p className="mt-6 max-w-md text-base leading-7 text-text-muted sm:text-lg">
-            I build scalable web applications, design intuitive user
-            experiences, and solve problems with clean code.
+            Build a full-stack Software and Automated solutions. Experienced in
+            Enterprise Systems serving 3,500+ users. Turn ideas to reality
+            through code.
           </p>
 
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <Button
-              href="#contact"
-              icon={<ArrowRight size={16} />}
-              className="w-full sm:w-auto"
-            >
+            <Button href="#contact" className="w-full sm:w-auto font-medium">
               Contact Me
             </Button>
             <Button
               href="#projects"
               variant="outline"
-              icon={<ArrowRight size={16} />}
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto font-medium"
             >
               View Projects
             </Button>
