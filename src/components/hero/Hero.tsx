@@ -20,7 +20,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="space-gradient relative min-h-svh overflow-hidden pt-16"
+      className="space-gradient relative min-h-svh overflow-hidden sm:pt-16"
     >
       {/* Stars */}
       <div aria-hidden="true" className="absolute inset-0">

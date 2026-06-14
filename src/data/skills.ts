@@ -47,6 +47,6 @@ export const techStack: TechItem[] = [
   { name: "HTML", icon: "/icons/html5.svg" },
   { name: "Docker", icon: "/icons/docker.svg" },
   { name: ".NET", icon: "/icons/dotnet.svg" },
-  { name: "MySQL", icon: "/icons/mysql_icon.svg" },
+  { name: "MySQL", icon: "/icons/mysql-icon-light.svg" },
   { name: "Swagger", icon: "/icons/swagger.svg" },
 ];
