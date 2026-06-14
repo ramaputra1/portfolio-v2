@@ -16,13 +16,48 @@ const GlobeInner = dynamic(() => import("./GlobeInner"), {
 });
 
 const LETTERS = "Hello World".split("");
-const REPEL_RADIUS = 140;  // px — wider zone = more sensitive
+
+const COLORS = [
+  "#3b82f6", // Blue
+  "#06b6d4", // Cyan
+  // "#14b8a6", // Teal
+  // "#22c55e", // Green
+  // "#84cc16", // Lime
+  "#eab308", // Yellow
+  // "#f59e0b", // Amber
+  // "#f97316", // Orange
+  "#ef4444", // Red
+  "#ec4899", // Pink
+  "#a855f7", // Purple
+];
+function build3DShadow(color: string) {
+  const depth = 7;
+  const shadows: string[] = [];
+  for (let i = 1; i <= depth; i++) {
+    shadows.push(`${i}px ${i + 1}px 0 ${color}`);
+  }
+  // Soft ambient glow
+  shadows.push(`0 0 28px ${color}99`);
+  return shadows.join(", ");
+}
+
+const REPEL_RADIUS = 140; // px — wider zone = more sensitive
 const REPEL_STRENGTH = 22; // px — hard ceiling on vertical displacement
 
 // Fast spring: letter smoothly chases the cursor target
-const SPRING_FORWARD = { type: "spring", stiffness: 320, damping: 28, mass: 0.5 } as const;
+const SPRING_FORWARD = {
+  type: "spring",
+  stiffness: 320,
+  damping: 28,
+  mass: 0.5,
+} as const;
 // Slow spring: letter drifts lazily back to rest when cursor leaves
-const SPRING_BACK = { type: "spring", stiffness: 38, damping: 14, mass: 1.2 } as const;
+const SPRING_BACK = {
+  type: "spring",
+  stiffness: 38,
+  damping: 14,
+  mass: 1.2,
+} as const;
 
 function HelloWorldRipple({
   opacity,
@@ -37,6 +72,15 @@ function HelloWorldRipple({
     LETTERS.map(() => null),
   );
 
+  const [colorIndex, setColorIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setColorIndex((i) => (i + 1) % COLORS.length);
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+
   // motionValue is a plain function (not a hook) — safe in useState lazy init
   const [mv] = useState<{ x: MotionValue<number>; y: MotionValue<number> }[]>(
     () => LETTERS.map(() => ({ x: motionValue(0), y: motionValue(0) })),
@@ -48,7 +92,10 @@ function HelloWorldRipple({
     return () => {
       isMounted.current = false;
       anims.forEach((ctrl) => ctrl?.stop());
-      mv.forEach(({ x, y }) => { x.set(0); y.set(0); });
+      mv.forEach(({ x, y }) => {
+        x.set(0);
+        y.set(0);
+      });
     };
   }, [mv]);
 
@@ -75,7 +122,10 @@ function HelloWorldRipple({
       const dist = Math.hypot(dx, dy);
       if (dist < REPEL_RADIUS && dist > 0) {
         const raw = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH;
-        const target = Math.max(-REPEL_STRENGTH, Math.min(REPEL_STRENGTH, (-dy / dist) * raw));
+        const target = Math.max(
+          -REPEL_STRENGTH,
+          Math.min(REPEL_STRENGTH, (-dy / dist) * raw),
+        );
         // Cancel previous animation and spring toward the new target
         animRef.current[i]?.stop();
         animRef.current[i] = animate(entry.y, target, SPRING_FORWARD);
@@ -99,7 +149,9 @@ function HelloWorldRipple({
           ? "clamp(1.35rem, 6.4vw, 1.75rem)"
           : "clamp(2rem, 4.5vw, 3.8rem)",
         opacity,
-        transition: "opacity 3s ease",
+        color: "#ffffff",
+        textShadow: build3DShadow(COLORS[colorIndex]),
+        transition: "opacity 3s ease, text-shadow 1s ease",
         padding: isCompact ? "0.45rem" : "1.5rem",
       }}
       onMouseMove={handleMouseMove}
@@ -196,7 +248,11 @@ export function Globe() {
     return () => {
       observer.disconnect();
       canvases.forEach((canvas) => {
-        canvas.removeEventListener("contextmenu", allowBrowserContextMenu, true);
+        canvas.removeEventListener(
+          "contextmenu",
+          allowBrowserContextMenu,
+          true,
+        );
       });
     };
   }, [size.w]);
@@ -244,7 +300,8 @@ export function Globe() {
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          background: "linear-gradient(to bottom, transparent 0%, #0a0f1e 100%)",
+          background:
+            "linear-gradient(to bottom, transparent 0%, #0a0f1e 100%)",
           opacity: gradientOpacity,
           transition: "opacity 0.05s linear",
         }}
