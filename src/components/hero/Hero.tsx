@@ -65,7 +65,11 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <Button href="#contact" icon={<ArrowRight size={16} />} className="w-full sm:w-auto">
+            <Button
+              href="#contact"
+              icon={<ArrowRight size={16} />}
+              className="w-full sm:w-auto"
+            >
               Contact Me
             </Button>
             <Button
@@ -84,7 +88,7 @@ export function Hero() {
                 key={label}
                 href={href}
                 label={label}
-                icon={<Icon size={18} />}
+                icon={<Icon size={label === "Email" ? 23 : 18} />}
                 external={href.startsWith("https://")}
                 className="text-sm font-medium"
               />

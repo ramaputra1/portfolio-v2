@@ -1,4 +1,4 @@
-import type { LucideIcon } from "lucide-react";
+import type { ComponentType } from "react";
 
 export interface Project {
   title: string;
@@ -23,5 +23,5 @@ export interface InfoBlock {
 export interface SocialLink {
   label: string;
   href: string;
-  icon: LucideIcon;
+  icon: ComponentType<{ size?: number; className?: string }>;
 }
