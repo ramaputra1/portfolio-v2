@@ -34,7 +34,7 @@ type ButtonAsButtonProps = ButtonBaseProps & {
 type ButtonProps = ButtonAsAnchorProps | ButtonAsButtonProps;
 
 const variantClasses: Record<ButtonVariant, string> = {
-  filled: "bg-white text-slate-900 hover:bg-slate-100",
+  filled: "bg-white text-slate-900 hover:bg-slate-300",
   outline:
     "border border-slate-600 text-white hover:border-white hover:bg-white/5",
 };
