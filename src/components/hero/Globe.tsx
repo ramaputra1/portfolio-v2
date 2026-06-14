@@ -10,16 +10,27 @@ const GlobeInner = dynamic(() => import("./GlobeInner"), {
 });
 
 const LETTERS = "Hello World".split("");
-const REPEL_RADIUS = 90;   // px — how far the cursor triggers movement
+const REPEL_RADIUS = 90; // px — how far the cursor triggers movement
 const REPEL_STRENGTH = 32; // px — max displacement
 
-const SPRING_BACK = { type: "spring", stiffness: 50, damping: 18, mass: 0.9 } as const;
+const SPRING_BACK = {
+  type: "spring",
+  stiffness: 50,
+  damping: 18,
+  mass: 0.9,
+} as const;
 
-function HelloWorldRipple({ opacity }: { opacity: number }) {
+function HelloWorldRipple({
+  opacity,
+  isCompact,
+}: {
+  opacity: number;
+  isCompact: boolean;
+}) {
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
   // motionValue is a plain function (not a hook) — safe in useState lazy init
-  const [mv] = useState<{ x: MotionValue<number>; y: MotionValue<number> }[]>(() =>
-    LETTERS.map(() => ({ x: motionValue(0), y: motionValue(0) })),
+  const [mv] = useState<{ x: MotionValue<number>; y: MotionValue<number> }[]>(
+    () => LETTERS.map(() => ({ x: motionValue(0), y: motionValue(0) })),
   );
 
   const springBack = (i: number) => {
@@ -53,12 +64,14 @@ function HelloWorldRipple({ opacity }: { opacity: number }) {
 
   return (
     <div
-      className="hero-hello pointer-events-auto absolute left-[72%] top-[20%] z-2 -translate-x-1/2 -translate-y-1/2 -rotate-3 cursor-default select-none"
+      className="hero-hello pointer-events-auto absolute left-[72%] top-[28%] z-[2] hidden -translate-x-1/2 -translate-y-1/2 -rotate-3 cursor-default select-none whitespace-nowrap sm:block lg:top-[20%]"
       style={{
-        fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
+        fontSize: isCompact
+          ? "clamp(1.75rem, 11vw, 3rem)"
+          : "clamp(2rem, 4.5vw, 3.8rem)",
         opacity,
         transition: "opacity 3s ease",
-        padding: "1.5rem",
+        padding: isCompact ? "1rem" : "1.5rem",
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -69,7 +82,12 @@ function HelloWorldRipple({ opacity }: { opacity: number }) {
           ref={(el) => {
             letterRefs.current[i] = el;
           }}
-          style={{ display: "inline-block", whiteSpace: "pre", x: mv[i].x, y: mv[i].y }}
+          style={{
+            display: "inline-block",
+            whiteSpace: "pre",
+            x: mv[i].x,
+            y: mv[i].y,
+          }}
         >
           {letter}
         </motion.span>
@@ -156,8 +174,10 @@ export function Globe() {
     return () => clearTimeout(id);
   }, [size.w]);
 
-  const canvasW = size.w * 1.5;
-  const canvasH = size.h * 1.3;
+  const isCompact = size.w > 0 && size.w < 640;
+  const isTablet = size.w >= 640 && size.w < 1024;
+  const canvasW = size.w * (isCompact ? 1.35 : isTablet ? 1.42 : 1.5);
+  const canvasH = size.h * (isCompact ? 1.08 : isTablet ? 1.18 : 1.3);
 
   return (
     <div
@@ -183,7 +203,9 @@ export function Globe() {
         </div>
       )}
 
-      {size.w > 0 && <HelloWorldRipple opacity={globeOpacity} />}
+      {size.w > 0 && (
+        <HelloWorldRipple opacity={globeOpacity} isCompact={isCompact} />
+      )}
 
       {/* Scroll dissolve into next section */}
       <div

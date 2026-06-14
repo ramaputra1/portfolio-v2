@@ -56,6 +56,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -68,6 +69,7 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* Hide marker leader lines and pills on small screens */
@@ -75,6 +77,15 @@ body {
   [data-marker-line],
   [data-marker-pill] {
     display: none !important;
+  }
+
+  .hero-hello {
+    text-shadow:
+      0 1px 0 #93c5fd,
+      0 2px 0 #60a5fa,
+      0 3px 0 #3b82f6,
+      0 4px 0 #2563eb,
+      2px 10px 18px rgba(0, 0, 0, 0.62);
   }
 }
 

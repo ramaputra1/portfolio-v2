@@ -41,7 +41,7 @@ const variantClasses: Record<ButtonVariant, string> = {
 export function Button(props: ButtonProps) {
   const { variant = "filled", icon, children, className } = props;
   const buttonClassName = cn(
-    "inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-colors",
+    "inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium whitespace-nowrap transition-colors",
     variantClasses[variant],
     className,
   );

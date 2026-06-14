@@ -20,7 +20,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="space-gradient relative min-h-screen overflow-hidden pt-16"
+      className="space-gradient relative min-h-svh overflow-hidden pt-16"
     >
       {/* Stars */}
       <div aria-hidden="true" className="absolute inset-0">
@@ -41,7 +41,7 @@ export function Hero() {
       <Globe />
 
       {/* Left-column text content */}
-      <div className="pointer-events-none relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-center px-6 py-14 md:py-20">
+      <div className="pointer-events-none relative z-10 mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl items-start px-4 py-10 sm:px-6 sm:py-14 md:items-center md:py-20">
         {/* Subtle scrim so text stays readable over the globe */}
         <div
           className="pointer-events-none absolute inset-y-0 left-0 w-full md:w-2/3"
@@ -52,11 +52,11 @@ export function Hero() {
         />
 
         {/* pointer-events-auto only on the actual text/buttons column */}
-        <div className="pointer-events-auto relative flex flex-col items-start md:-translate-x-4 lg:-translate-x-8">
-          <h1 className="text-5xl font-bold tracking-normal text-text md:text-7xl">
+        <div className="pointer-events-auto relative flex max-w-[34rem] min-w-0 flex-col items-start pt-8 sm:pt-10 md:-translate-x-4 md:pt-0 lg:-translate-x-8">
+          <h1 className="text-4xl font-bold tracking-normal text-text sm:text-5xl md:text-7xl">
             Rama Putra
           </h1>
-          <p className="mt-2 bg-linear-to-r from-primary to-primary-light bg-clip-text text-5xl font-bold tracking-normal text-transparent md:text-6xl">
+          <p className="mt-2 max-w-full bg-linear-to-r from-primary to-primary-light bg-clip-text text-4xl font-bold tracking-normal text-balance text-transparent sm:text-5xl md:text-6xl">
             Full Stack Developer
           </p>
           <p className="mt-6 max-w-md text-base leading-7 text-text-muted sm:text-lg">
@@ -64,14 +64,15 @@ export function Hero() {
             experiences, and solve problems with clean code.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href="#contact" icon={<ArrowRight size={16} />}>
+          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <Button href="#contact" icon={<ArrowRight size={16} />} className="w-full sm:w-auto">
               Contact Me
             </Button>
             <Button
               href="#projects"
               variant="outline"
               icon={<ArrowRight size={16} />}
+              className="w-full sm:w-auto"
             >
               View Projects
             </Button>
