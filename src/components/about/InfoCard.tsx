@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
@@ -27,7 +27,17 @@ export function InfoCard({
   headerRight,
 }: InfoCardProps) {
   const [hovered, setHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = (e: MediaQueryList | MediaQueryListEvent) => setIsMobile(e.matches);
+    update(mq);
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const glowing = hovered || isMobile;
   const Tag = href ? motion.a : motion.div;
 
   return (
@@ -40,8 +50,8 @@ export function InfoCard({
       )}
       style={{
         backgroundColor: "var(--color-bg-elevated)",
-        border: `1px solid ${hovered ? `${color}70` : "var(--color-border)"}`,
-        boxShadow: hovered
+        border: `1px solid ${glowing ? `${color}70` : "var(--color-border)"}`,
+        boxShadow: glowing
           ? `0 22px 44px -12px ${color}38, 0 0 0 1px ${color}22, inset 0 1px 0 ${color}18`
           : "0 2px 8px rgba(0,0,0,0.15)",
         transformPerspective: 700,
@@ -55,9 +65,9 @@ export function InfoCard({
       <div className="flex items-center gap-2">
         <span
           style={{
-            color: hovered ? color : "var(--color-primary-light)",
+            color: glowing ? color : "var(--color-primary-light)",
             transition: "color 0.35s ease",
-            filter: hovered ? `drop-shadow(0 0 6px ${color}80)` : "none",
+            filter: glowing ? `drop-shadow(0 0 6px ${color}80)` : "none",
           }}
         >
           {icon}
@@ -65,7 +75,7 @@ export function InfoCard({
         <h3
           className="font-bold text-text"
           style={{
-            color: hovered ? color : undefined,
+            color: glowing ? color : undefined,
             transition: "color 0.35s ease",
           }}
         >

@@ -143,7 +143,7 @@ export async function About() {
                       alt={name}
                       width={32}
                       height={32}
-                      className="object-contain"
+                      className="size-5 object-contain sm:size-8"
                     />
                   </div>
                 ))}
