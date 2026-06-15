@@ -35,11 +35,11 @@ export function Hero() {
       {/* Full-bleed globe — anchored bottom-right, behind everything */}
       <Globe />
 
-      {/* Bottom dissolve — tall enough that the fade spans a meaningful scroll distance */}
+      {/* Bottom dissolve */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-[55vh]"
-        style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(10,15,30,0.92) 100%)" }}
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-[30vh]"
+        style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(10,15,30,0.75) 100%)" }}
       />
 
       {/* Mobile-only dark scrim — globe bleeds fully behind text on small screens */}

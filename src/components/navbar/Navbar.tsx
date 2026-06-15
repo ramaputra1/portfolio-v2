@@ -35,7 +35,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 hidden sm:block",
+        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300",
         isScrolled
           ? "border-border bg-bg/80 backdrop-blur-md"
           : "border-transparent bg-transparent",
@@ -89,7 +89,7 @@ export function Navbar() {
 
       <div
         className={cn(
-          "border-t border-border bg-bg/95 px-6 py-5 shadow-lg backdrop-blur-md transition-[opacity,transform] duration-200 md:hidden",
+          "absolute inset-x-0 top-full border-t border-border bg-bg/95 px-6 py-5 shadow-lg backdrop-blur-md transition-[opacity,transform] duration-200 md:hidden",
           isMenuOpen
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-2 opacity-0",
