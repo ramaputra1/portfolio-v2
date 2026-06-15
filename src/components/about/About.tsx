@@ -9,13 +9,7 @@ import {
 import { Section, SectionHeader } from "@/components/ui";
 import { InfoCard } from "./InfoCard";
 import { ContribGraph } from "./ContribGraph";
-import {
-  bio,
-  education,
-  experience,
-  skills,
-  techStack,
-} from "@/data/skills";
+import { bio, education, experience, skills, techStack } from "@/data/skills";
 import { getGitHubStats } from "@/lib/github";
 
 export async function About() {
@@ -73,14 +67,22 @@ export async function About() {
         {/* Card grid */}
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {/* Education */}
-          <InfoCard color="#06b6d4" icon={<GraduationCap size={18} />} title="Education">
+          <InfoCard
+            color="#06b6d4"
+            icon={<GraduationCap size={18} />}
+            title="Education"
+          >
             <p className="font-bold text-text">{education.primary}</p>
             <p>{education.secondary}</p>
             <p>{education.tertiary}</p>
           </InfoCard>
 
           {/* Experience */}
-          <InfoCard color="#3b82f6" icon={<Briefcase size={18} />} title="Experience">
+          <InfoCard
+            color="#3b82f6"
+            icon={<Briefcase size={18} />}
+            title="Experience"
+          >
             <p className="font-bold text-text">{experience.primary}</p>
             <p>{experience.secondary}</p>
             <p>{experience.tertiary}</p>
@@ -97,19 +99,19 @@ export async function About() {
           <InfoCard
             color="#a855f7"
             icon={<GitBranch size={18} />}
-            title="GitHub"
+            title="GitHub Stats"
             href="https://github.com/ramaputra1"
             className="md:col-span-2 lg:col-span-3"
             bodyClassName="flex flex-col gap-4 sm:flex-row sm:items-start"
           >
             {/* Left: GitHub info + heatmap */}
             <div className="flex min-w-0 flex-1 flex-col gap-3">
-              {/* Profile info — edit freely */}
+              {/* Profile info */}
               <div className="text-sm">
-                <p className="font-semibold text-text">Rama Putra</p>
                 <p className="text-text-muted">@ramaputra1</p>
                 <p className="mt-1 text-text-muted">
-                  {gh.publicRepos} repositories · {gh.followers} followers
+                  {gh.contributions.reduce((sum, c) => sum + c.count, 0)}{" "}
+                  contributions in the last year
                 </p>
               </div>
               {/* Contribution heatmap */}
@@ -117,7 +119,7 @@ export async function About() {
             </div>
 
             {/* Right: Tech Stack */}
-            <div className="shrink-0 sm:w-56">
+            <div className="shrink-0 sm:w-80">
               <div className="mb-3 flex items-center gap-1.5 text-sm font-semibold text-text">
                 <Layers size={14} />
                 Tech Stack
