@@ -89,7 +89,7 @@ export function Navbar() {
 
       <div
         className={cn(
-          "border-t border-border bg-bg/95 px-6 py-5 shadow-lg backdrop-blur-md transition-[opacity,transform] duration-200 md:hidden",
+          "absolute inset-x-0 top-full border-t border-border bg-bg/95 px-6 py-5 shadow-lg backdrop-blur-md transition-[opacity,transform] duration-200 md:hidden",
           isMenuOpen
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-2 opacity-0",

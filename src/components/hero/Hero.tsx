@@ -20,7 +20,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="space-gradient relative min-h-svh overflow-hidden pt-16"
+      className="space-gradient relative min-h-svh overflow-hidden sm:pt-16"
     >
       {/* Stars */}
       <div aria-hidden="true" className="absolute inset-0">
@@ -32,13 +32,15 @@ export function Hero() {
         ))}
       </div>
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-44 bg-linear-to-b from-transparent via-bg/65 to-bg"
-      />
-
       {/* Full-bleed globe — anchored bottom-right, behind everything */}
       <Globe />
+
+      {/* Bottom dissolve */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-[30vh]"
+        style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(10,15,30,0.75) 100%)" }}
+      />
 
       {/* Mobile-only dark scrim — globe bleeds fully behind text on small screens */}
       <div

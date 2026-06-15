@@ -36,8 +36,10 @@ function build3DShadow(color: string) {
   for (let i = 1; i <= depth; i++) {
     shadows.push(`${i}px ${i + 1}px 0 ${color}`);
   }
-  // Soft ambient glow
-  shadows.push(`0 0 28px ${color}99`);
+  // Layered backlight — bleeds behind each letter like colored light
+  shadows.push(`0 0 18px ${color}cc`);
+  shadows.push(`0 0 45px ${color}88`);
+  shadows.push(`0 0 80px ${color}50`);
   return shadows.join(", ");
 }
 
