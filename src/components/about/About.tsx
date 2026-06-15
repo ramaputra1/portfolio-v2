@@ -92,17 +92,38 @@ export async function About() {
             <p>{experience.tertiary}</p>
           </InfoCard>
 
-          {/* Hobbies */}
-          <InfoCard color="#f43f5e" icon={<Heart size={18} />} title="Hobbies">
-            {hobbies.map((h) => (
-              <p key={h}>{h}</p>
+          {/* Skills */}
+          <InfoCard
+            color="#22c55e"
+            icon={<Code2 size={18} />}
+            title="Soft Skills"
+          >
+            {skills.map((s) => (
+              <p key={s}>{s}</p>
             ))}
           </InfoCard>
 
-          {/* Skills */}
-          <InfoCard color="#22c55e" icon={<Code2 size={18} />} title="Skills">
-            {skills.map((s) => (
-              <p key={s}>{s}</p>
+          {/* Favorites */}
+          <InfoCard
+            color="#f43f5e"
+            icon={<Heart size={18} />}
+            title="Favorites"
+          >
+            {hobbies.map((h) => (
+              <p key={h}>{h}</p>
+            ))}
+            <div className="mt-1 border-t border-border-light pt-1" />
+            <p className="font-semibold text-text">Top 3 foods:</p>
+            {["Soto Solo", "Nasi Padang", "Susu Segar Solo"].map((food) => (
+              <a
+                key={food}
+                href={`https://www.google.com/search?q=${encodeURIComponent(food)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-[#e18393] transition-colors"
+              >
+                {food}
+              </a>
             ))}
           </InfoCard>
 
