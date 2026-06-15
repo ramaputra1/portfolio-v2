@@ -13,6 +13,7 @@ interface InfoCardProps {
   bodyClassName?: string;
   color?: string;
   href?: string;
+  headerRight?: ReactNode;
 }
 
 export function InfoCard({
@@ -23,6 +24,7 @@ export function InfoCard({
   bodyClassName,
   color = "#3b82f6",
   href,
+  headerRight,
 }: InfoCardProps) {
   const [hovered, setHovered] = useState(false);
 
@@ -30,10 +32,12 @@ export function InfoCard({
 
   return (
     <Tag
-      {...(href
-        ? { href, target: "_blank", rel: "noopener noreferrer" }
-        : {})}
-      className={cn("flex flex-col gap-3 rounded-xl p-5", href && "cursor-pointer", className)}
+      {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
+      className={cn(
+        "flex flex-col gap-3 rounded-xl p-5",
+        href && "cursor-pointer",
+        className,
+      )}
       style={{
         backgroundColor: "var(--color-bg-elevated)",
         border: `1px solid ${hovered ? `${color}70` : "var(--color-border)"}`,
@@ -43,7 +47,7 @@ export function InfoCard({
         transformPerspective: 700,
         transition: "border-color 0.35s ease, box-shadow 0.35s ease",
       }}
-      whileHover={{ y: -7, rotateX: 3, rotateY: -2, scale: 1.025 }}
+      whileHover={{ y: -1, rotateX: 0.5, rotateY: -0.3, scale: 1.01 }}
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
@@ -67,6 +71,7 @@ export function InfoCard({
         >
           {title}
         </h3>
+        {headerRight && <div>{headerRight}</div>}
       </div>
       <div className={cn("space-y-1 text-sm text-text-muted", bodyClassName)}>
         {children}

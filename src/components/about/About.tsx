@@ -4,12 +4,20 @@ import {
   Briefcase,
   Code2,
   GitBranch,
-  Layers,
+  Heart,
+  LucidePanelTopInactive,
 } from "lucide-react";
 import { Section, SectionHeader } from "@/components/ui";
 import { InfoCard } from "./InfoCard";
 import { ContribGraph } from "./ContribGraph";
-import { bio, education, experience, skills, techStack } from "@/data/skills";
+import {
+  bio,
+  education,
+  experience,
+  skills,
+  hobbies,
+  techStack,
+} from "@/data/skills";
 import { getGitHubStats } from "@/lib/github";
 
 export async function About() {
@@ -66,26 +74,29 @@ export async function About() {
 
         {/* Card grid */}
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {/* Education */}
+          {/* Education + Experience */}
           <InfoCard
             color="#06b6d4"
             icon={<GraduationCap size={18} />}
-            title="Education"
+            title="Education & Experience"
           >
             <p className="font-bold text-text">{education.primary}</p>
             <p>{education.secondary}</p>
             <p>{education.tertiary}</p>
-          </InfoCard>
-
-          {/* Experience */}
-          <InfoCard
-            color="#3b82f6"
-            icon={<Briefcase size={18} />}
-            title="Experience"
-          >
-            <p className="font-bold text-text">{experience.primary}</p>
+            <div className="my-1 border-t border-border-light" />
+            <div className="flex items-center gap-1.5 text-text">
+              <Briefcase size={13} />
+              <span className="font-bold">{experience.primary}</span>
+            </div>
             <p>{experience.secondary}</p>
             <p>{experience.tertiary}</p>
+          </InfoCard>
+
+          {/* Hobbies */}
+          <InfoCard color="#f43f5e" icon={<Heart size={18} />} title="Hobbies">
+            {hobbies.map((h) => (
+              <p key={h}>{h}</p>
+            ))}
           </InfoCard>
 
           {/* Skills */}
@@ -99,7 +110,7 @@ export async function About() {
           <InfoCard
             color="#a855f7"
             icon={<GitBranch size={18} />}
-            title="GitHub Stats"
+            title="GitHub Stats & Tech I Have Worked With"
             href="https://github.com/ramaputra1"
             className="md:col-span-2 lg:col-span-3"
             bodyClassName="flex flex-col gap-4 sm:flex-row sm:items-start"
@@ -120,16 +131,12 @@ export async function About() {
 
             {/* Right: Tech Stack */}
             <div className="shrink-0 sm:w-80">
-              <div className="mb-3 flex items-center gap-1.5 text-sm font-semibold text-text">
-                <Layers size={14} />
-                Tech Stack
-              </div>
               <div className="flex flex-wrap gap-3">
                 {techStack.map(({ name, icon }) => (
                   <div
                     key={name}
                     title={name}
-                    className="transition-transform hover:scale-110"
+                    className="transition-all duration-200 hover:scale-110 hover:filter-[drop-shadow(0_0_7px_#a855f7)]"
                   >
                     <Image
                       src={icon}

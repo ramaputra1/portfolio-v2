@@ -21,7 +21,12 @@ export const skills: string[] = [
   "Team Collaboration",
 ];
 
-
+export const hobbies: string[] = [
+  "Photography",
+  "Digital Art & Design",
+  "Gaming",
+  "Traveling",
+];
 
 export const techStack: TechItem[] = [
   { name: "React", icon: "/icons/react.svg" },
@@ -32,11 +37,11 @@ export const techStack: TechItem[] = [
   { name: "Python", icon: "/icons/python.svg" },
   { name: "Tailwind CSS", icon: "/icons/tailwind.svg" },
   { name: "C#", icon: "/icons/csharp.svg" },
-  { name: "Java", icon: "/icons/java.svg" },
   { name: "CSS", icon: "/icons/css_old.svg" },
   { name: "HTML", icon: "/icons/html5.svg" },
   { name: "Docker", icon: "/icons/docker.svg" },
   { name: ".NET", icon: "/icons/dotnet.svg" },
   { name: "MySQL", icon: "/icons/mysql-icon-light.svg" },
   { name: "Swagger", icon: "/icons/swagger.svg" },
+  { name: "Java", icon: "/icons/java.svg" },
 ];
