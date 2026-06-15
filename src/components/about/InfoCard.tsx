@@ -10,7 +10,9 @@ interface InfoCardProps {
   title: string;
   children: ReactNode;
   className?: string;
+  bodyClassName?: string;
   color?: string;
+  href?: string;
 }
 
 export function InfoCard({
@@ -18,13 +20,20 @@ export function InfoCard({
   title,
   children,
   className,
+  bodyClassName,
   color = "#3b82f6",
+  href,
 }: InfoCardProps) {
   const [hovered, setHovered] = useState(false);
 
+  const Tag = href ? motion.a : motion.div;
+
   return (
-    <motion.div
-      className={cn("flex flex-col gap-3 rounded-xl p-5", className)}
+    <Tag
+      {...(href
+        ? { href, target: "_blank", rel: "noopener noreferrer" }
+        : {})}
+      className={cn("flex flex-col gap-3 rounded-xl p-5", href && "cursor-pointer", className)}
       style={{
         backgroundColor: "var(--color-bg-elevated)",
         border: `1px solid ${hovered ? `${color}70` : "var(--color-border)"}`,
@@ -59,7 +68,9 @@ export function InfoCard({
           {title}
         </h3>
       </div>
-      <div className="space-y-1 text-sm text-text-muted">{children}</div>
-    </motion.div>
+      <div className={cn("space-y-1 text-sm text-text-muted", bodyClassName)}>
+        {children}
+      </div>
+    </Tag>
   );
 }

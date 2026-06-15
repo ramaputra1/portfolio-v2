@@ -3,23 +3,23 @@ import {
   GraduationCap,
   Briefcase,
   Code2,
-  Award,
   GitBranch,
   Layers,
 } from "lucide-react";
 import { Section, SectionHeader } from "@/components/ui";
 import { InfoCard } from "./InfoCard";
+import { ContribGraph } from "./ContribGraph";
 import {
   bio,
   education,
   experience,
   skills,
-  certificates,
-  githubStats,
   techStack,
 } from "@/data/skills";
+import { getGitHubStats } from "@/lib/github";
 
-export function About() {
+export async function About() {
+  const gh = await getGitHubStats();
   return (
     <div className="space-gradient relative overflow-hidden">
       {/* Stars — matching Hero aesthetic */}
@@ -93,38 +93,52 @@ export function About() {
             ))}
           </InfoCard>
 
-          {/* Certificates */}
-          <InfoCard color="#f59e0b" icon={<Award size={18} />} title="Certificates">
-            {certificates.map((c) => (
-              <p key={c}>{c}</p>
-            ))}
-          </InfoCard>
+          {/* GitHub + Tech Stack — merged, full-width */}
+          <InfoCard
+            color="#a855f7"
+            icon={<GitBranch size={18} />}
+            title="GitHub"
+            href="https://github.com/ramaputra1"
+            className="md:col-span-2 lg:col-span-3"
+            bodyClassName="flex flex-col gap-4 sm:flex-row sm:items-start"
+          >
+            {/* Left: GitHub info + heatmap */}
+            <div className="flex min-w-0 flex-1 flex-col gap-3">
+              {/* Profile info — edit freely */}
+              <div className="text-sm">
+                <p className="font-semibold text-text">Rama Putra</p>
+                <p className="text-text-muted">@ramaputra1</p>
+                <p className="mt-1 text-text-muted">
+                  {gh.publicRepos} repositories · {gh.followers} followers
+                </p>
+              </div>
+              {/* Contribution heatmap */}
+              <ContribGraph contributions={gh.contributions} />
+            </div>
 
-          {/* GitHub Stats */}
-          <InfoCard color="#a855f7" icon={<GitBranch size={18} />} title="GitHub Stats">
-            {githubStats.map((g) => (
-              <p key={g}>{g}</p>
-            ))}
-          </InfoCard>
-
-          {/* Tech Stack */}
-          <InfoCard color="#ec4899" icon={<Layers size={18} />} title="Tech Stack">
-            <div className="flex flex-wrap gap-3 pt-1">
-              {techStack.map(({ name, icon }) => (
-                <div
-                  key={name}
-                  title={name}
-                  className="transition-transform hover:scale-110"
-                >
-                  <Image
-                    src={icon}
-                    alt={name}
-                    width={32}
-                    height={32}
-                    className="object-contain"
-                  />
-                </div>
-              ))}
+            {/* Right: Tech Stack */}
+            <div className="shrink-0 sm:w-56">
+              <div className="mb-3 flex items-center gap-1.5 text-sm font-semibold text-text">
+                <Layers size={14} />
+                Tech Stack
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {techStack.map(({ name, icon }) => (
+                  <div
+                    key={name}
+                    title={name}
+                    className="transition-transform hover:scale-110"
+                  >
+                    <Image
+                      src={icon}
+                      alt={name}
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </InfoCard>
         </div>

@@ -21,17 +21,7 @@ export const skills: string[] = [
   "Team Collaboration",
 ];
 
-export const certificates: string[] = [
-  "AWS Cloud Practitioner",
-  "Meta Front-End Developer",
-  "Google IT Support",
-];
 
-export const githubStats: string[] = [
-  "120+ Contributions this year",
-  "20+ Repositories",
-  "5+ Open Source",
-];
 
 export const techStack: TechItem[] = [
   { name: "React", icon: "/icons/react.svg" },
