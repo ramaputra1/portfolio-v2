@@ -5,6 +5,8 @@ export interface Project {
   description: string;
   image: string;
   tags: string[];
+  type: string;  // e.g. "Web App" | "Design" | "Tool" — edit in src/data/projects.ts
+  date: string;  // ISO "YYYY-MM-DD" — used for date sort
   liveUrl: string;
   githubUrl: string;
 }
