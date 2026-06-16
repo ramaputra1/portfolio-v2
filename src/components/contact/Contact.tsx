@@ -460,6 +460,30 @@ function Robot() {
 export function Contact() {
   return (
     <div className="space-gradient relative overflow-hidden">
+      {/* Stars */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        {[
+          "left-[5%] top-[8%] size-1 opacity-40",
+          "left-[15%] top-[55%] size-0.5 opacity-30",
+          "left-[25%] top-[20%] size-1 opacity-50",
+          "left-[40%] top-[75%] size-0.5 opacity-35",
+          "left-[58%] top-[12%] size-1 opacity-30",
+          "left-[70%] top-[60%] size-1.5 opacity-20",
+          "left-[82%] top-[30%] size-1 opacity-45",
+          "left-[92%] top-[80%] size-0.5 opacity-30",
+          "right-[8%] top-[15%] size-1 opacity-50",
+          "right-[22%] top-[68%] size-0.5 opacity-40",
+          "right-[38%] top-[90%] size-1 opacity-25",
+          "left-[50%] top-[40%] size-0.5 opacity-40",
+          "left-[76%] top-[85%] size-1 opacity-30",
+          "right-[14%] top-[48%] size-1.5 opacity-20",
+        ].map((cls) => (
+          <span
+            key={cls}
+            className={`absolute rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.5)] ${cls}`}
+          />
+        ))}
+      </div>
       <Robot />
       <Section id="contact">
         <div className="grid gap-12 md:grid-cols-2 md:items-start">
@@ -563,7 +587,7 @@ export function Contact() {
             <p className="text-sm text-text-dim">
               © 2026 Rama Putra. All rights reserved.
             </p>
-            <p className="text-sm text-text-dim">Built with Cinta ❤️</p>
+            <p className="text-sm text-text-dim">Built with Cinta 🖤</p>
           </div>
         </div>
       </div>

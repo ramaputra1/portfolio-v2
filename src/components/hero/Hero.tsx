@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { socials } from "@/data/social";
-import { Button, IconLink } from "@/components/ui";
+import { IconLink } from "@/components/ui";
 import { Globe } from "./Globe";
 
 const stars = [
@@ -67,16 +67,18 @@ export function Hero() {
 
         {/* pointer-events-auto only on the actual text/buttons column */}
         <div className="pointer-events-auto relative flex max-w-[34rem] min-w-0 flex-col items-start pt-8 sm:pt-10 md:-translate-x-4 md:pt-0 lg:-translate-x-8">
-          <h1 className="text-4xl font-bold tracking-normal sm:text-5xl md:text-7xl">
+          <h1 className="relative text-4xl font-bold tracking-normal sm:text-5xl md:text-7xl" style={{ color: "#a5b4fc" }}>
             <span
-              className="shimmer-text bg-clip-text text-transparent"
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 -z-10"
               style={{
-                backgroundImage:
-                  "linear-gradient(120deg, #c7d2fe, #a5b4fc, #818cf8, #c7d2fe)",
+                background:
+                  "radial-gradient(ellipse at 40% 60%, rgba(99,102,241,0.28) 0%, transparent 70%)",
+                filter: "blur(18px)",
+                transform: "scale(1.3)",
               }}
-            >
-              Rama Putra
-            </span>
+            />
+            Rama Putra
           </h1>
           <p
             className="shimmer-text mt-2 max-w-full bg-clip-text text-3xl font-bold tracking-normal text-balance text-transparent sm:text-5xl md:text-5xl"
@@ -94,16 +96,18 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <Button href="#contact" className="w-full sm:w-auto font-medium">
+            <a
+              href="#contact"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-indigo-500/50 bg-[rgba(19,25,60,0.92)] px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-indigo-200 shadow-[0_4px_20px_rgba(99,102,241,0.15)] transition-all duration-300 hover:border-indigo-500/80 hover:bg-[rgba(25,32,75,0.97)] hover:shadow-[0_8px_32px_rgba(99,102,241,0.35),0_0_0_1px_rgba(99,102,241,0.2)] sm:w-auto"
+            >
               Contact Me
-            </Button>
-            <Button
+            </a>
+            <a
               href="#projects"
-              variant="outline"
-              className="w-full sm:w-auto font-medium"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-indigo-500/35 bg-[rgba(99,102,241,0.08)] px-5 py-2.5 text-sm font-medium whitespace-nowrap text-indigo-300 transition-all duration-300 hover:border-indigo-500/55 hover:bg-[rgba(99,102,241,0.14)] hover:text-indigo-200 sm:w-auto"
             >
               View Projects
-            </Button>
+            </a>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
