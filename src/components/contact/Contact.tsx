@@ -78,7 +78,7 @@ function Robot() {
   return (
     <div
       ref={containerRef}
-      className="pointer-events-none absolute bottom-16 left-4 hidden lg:block xl:left-10"
+      className="pointer-events-none absolute bottom-26 left-2 block origin-bottom-left scale-[0.6] sm:scale-[0.75] lg:scale-100 xl:left-10"
     >
       <svg
         viewBox="0 0 200 220"
@@ -485,7 +485,7 @@ export function Contact() {
         ))}
       </div>
       <Robot />
-      <Section id="contact">
+      <Section id="contact" className="pb-33 sm:pb-52 lg:pb-56">
         <div className="grid gap-12 md:grid-cols-2 md:items-start">
           {/* Left — text */}
           <div>
@@ -500,14 +500,14 @@ export function Contact() {
           </div>
 
           {/* Right — cards */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2.5">
             {cards.map(({ icon, label, sub, href, primary }) => (
               <a
                 key={label}
                 href={href}
                 target={primary ? undefined : "_blank"}
                 rel={primary ? undefined : "noopener noreferrer"}
-                className="group flex items-center gap-4 rounded-xl border p-5 transition-all duration-300"
+                className="group flex items-center gap-3 rounded-xl border p-3.5 transition-all duration-300"
                 style={
                   primary
                     ? {
@@ -545,7 +545,7 @@ export function Contact() {
                 }}
               >
                 <div
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
                   style={{
                     background: "rgba(99,102,241,0.15)",
                     color: "#a5b4fc",
@@ -555,18 +555,18 @@ export function Contact() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p
-                    className={`font-semibold ${primary ? "text-indigo-200" : "text-text"}`}
+                    className={`text-sm font-semibold ${primary ? "text-indigo-200" : "text-text"}`}
                   >
                     {label}
                   </p>
                   <p
-                    className={`mt-0.5 truncate text-sm ${primary ? "text-slate-400" : "text-text-muted"}`}
+                    className={`truncate text-xs ${primary ? "text-slate-400" : "text-text-muted"}`}
                   >
                     {sub}
                   </p>
                 </div>
                 <ArrowUpRight
-                  size={18}
+                  size={16}
                   className="shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   style={{
                     color: primary
@@ -587,7 +587,7 @@ export function Contact() {
             <p className="text-sm text-text-dim">
               © 2026 Rama Putra. All rights reserved.
             </p>
-            <p className="text-sm text-text-dim">Built with Cinta 🖤</p>
+            <p className="text-sm text-text-dim">Built with Cinta</p>
           </div>
         </div>
       </div>
