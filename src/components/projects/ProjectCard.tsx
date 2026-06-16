@@ -9,52 +9,52 @@ import type { Project } from "@/types";
 
 const ACCENT = "#6366f1";
 
-const TAG_ICONS: Record<string, string> = {
-  HTML: "/icons/html5.svg",
-  CSS: "/icons/css_old.svg",
-  Javascript: "/icons/javascript.svg",
-  JavaScript: "/icons/javascript.svg",
-  TypeScript: "/icons/typescript.svg",
+export const TAG_ICONS: Record<string, string> = {
+  "HTML":         "/icons/html5.svg",
+  "CSS":          "/icons/css_old.svg",
+  "Javascript":   "/icons/javascript.svg",
+  "JavaScript":   "/icons/javascript.svg",
+  "TypeScript":   "/icons/typescript.svg",
   "Tailwind CSS": "/icons/tailwindcss.svg",
-  React: "/icons/react.svg",
-  "Next.js": "/icons/nextjs.svg",
-  "Node.js": "/icons/nodejs.svg",
-  Python: "/icons/python.svg",
-  Docker: "/icons/docker.svg",
-  MySQL: "/icons/mysql-icon-light.svg",
-  Java: "/icons/java.svg",
-  "C#": "/icons/csharp.svg",
-  ".NET": "/icons/dotnet.svg",
-  MongoDB: "/icons/mongodb.svg",
+  "React":        "/icons/react.svg",
+  "Next.js":      "/icons/nextjs.svg",
+  "Node.js":      "/icons/nodejs.svg",
+  "Python":       "/icons/python.svg",
+  "Docker":       "/icons/docker.svg",
+  "MySQL":        "/icons/mysql-icon-light.svg",
+  "Java":         "/icons/java.svg",
+  "C#":           "/icons/csharp.svg",
+  ".NET":         "/icons/dotnet.svg",
+  "MongoDB":      "/icons/mongodb.svg",
 };
 
-function TagItem({ tag }: { tag: string }) {
+export function TagItem({ tag }: { tag: string }) {
   const icon = TAG_ICONS[tag];
   if (icon) {
     return (
       <div title={tag} className="flex items-center justify-center">
-        <Image
-          src={icon}
-          alt={tag}
-          width={20}
-          height={20}
-          className="size-5 object-contain"
-        />
+        <Image src={icon} alt={tag} width={20} height={20} className="size-5 object-contain" />
       </div>
     );
   }
   return <TechTag>{tag}</TechTag>;
 }
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  onOpen,
+}: {
+  project: Project;
+  onOpen: (p: Project) => void;
+}) {
   const [hovered, setHovered] = useState(false);
 
-  const hasLive = project.liveUrl !== "#";
+  const hasLive   = project.liveUrl   !== "#";
   const hasGithub = project.githubUrl !== "#";
 
   return (
     <motion.div
-      className="flex flex-col overflow-hidden rounded-xl"
+      className="flex cursor-pointer flex-col overflow-hidden rounded-xl"
       style={{
         backgroundColor: "var(--color-bg-elevated)",
         border: `1px solid ${hovered ? `${ACCENT}70` : "var(--color-border)"}`,
@@ -68,6 +68,7 @@ export function ProjectCard({ project }: { project: Project }) {
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
+      onClick={() => onOpen(project)}
     >
       {/* Screenshot */}
       <div className="relative aspect-video w-full overflow-hidden bg-bg-hover">
@@ -81,8 +82,7 @@ export function ProjectCard({ project }: { project: Project }) {
           aria-hidden="true"
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(to bottom, transparent 50%, rgba(10,15,30,0.65) 100%)",
+            background: "linear-gradient(to bottom, transparent 50%, rgba(10,15,30,0.65) 100%)",
           }}
         />
       </div>
@@ -99,15 +99,11 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.description}
         </p>
 
-        {/* Tech icons */}
-        <div className="flex flex-wrap items-center gap-3">
-          {project.tags.map((tag) => (
-            <TagItem key={tag} tag={tag} />
-          ))}
-        </div>
-
-        {/* Links */}
-        <div className="flex items-center gap-5 border-t border-border pt-3">
+        {/* Links — stop propagation so clicks don't open modal */}
+        <div
+          className="flex items-center gap-5 border-t border-border pt-3"
+          onClick={(e) => e.stopPropagation()}
+        >
           {hasLive && (
             <IconLink
               href={project.liveUrl}
