@@ -134,3 +134,8 @@ body {
     var(--color-bg);
   background-blend-mode: normal, screen, screen, normal;
 }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
