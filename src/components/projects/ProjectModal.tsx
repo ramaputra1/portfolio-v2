@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink, GitBranch } from "lucide-react";
-import { IconLink, TechTag } from "@/components/ui";
+import { TechTag } from "@/components/ui";
 import type { Project } from "@/types";
 
 const ACCENT = "#6366f1";
@@ -138,24 +138,54 @@ export function ProjectModal({ project, onClose }: Props) {
                 </div>
 
                 {/* Links */}
-                <div className="flex items-center gap-5 border-t border-border pt-3">
+                <div className="flex items-center gap-4 border-t border-border pt-3">
                   {hasLive && (
-                    <IconLink
+                    <a
                       href={project.liveUrl}
-                      label="Live Demo"
-                      icon={<ExternalLink size={14} />}
-                      external
-                      className="text-sm"
-                    />
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-bold transition-all duration-200"
+                      style={{
+                        color: "#facc15",
+                        background: "rgba(250,204,21,0.1)",
+                        boxShadow: "0 0 10px rgba(250,204,21,0.2)",
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.background = "rgba(250,204,21,0.18)";
+                        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 16px rgba(250,204,21,0.4)";
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.background = "rgba(250,204,21,0.1)";
+                        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 10px rgba(250,204,21,0.2)";
+                      }}
+                    >
+                      <ExternalLink size={13} />
+                      Live Demo
+                    </a>
                   )}
                   {hasGithub && (
-                    <IconLink
+                    <a
                       href={project.githubUrl}
-                      label="GitHub"
-                      icon={<GitBranch size={14} />}
-                      external
-                      className="text-sm"
-                    />
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-bold transition-all duration-200"
+                      style={{
+                        color: "#60a5fa",
+                        background: "rgba(29,78,216,0.15)",
+                        boxShadow: "0 0 10px rgba(29,78,216,0.25)",
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.background = "rgba(29,78,216,0.25)";
+                        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 16px rgba(29,78,216,0.45)";
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.background = "rgba(29,78,216,0.15)";
+                        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 10px rgba(29,78,216,0.25)";
+                      }}
+                    >
+                      <GitBranch size={13} />
+                      GitHub
+                    </a>
                   )}
                   {!hasLive && !hasGithub && (
                     <span className="text-xs italic text-text-muted">Coming soon</span>
