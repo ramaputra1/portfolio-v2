@@ -494,8 +494,7 @@ export function Contact() {
               title="Let's Build Some Wonderful Things Together"
             />
             <p className="mt-4 max-w-sm text-sm leading-7 text-text-muted">
-              I&apos;m always open to collaborations, internships,
-              opportunities, or even hot chocolate ☕
+              Available for any Collaboration, Connection or even Hot Chocolate.
             </p>
           </div>
 

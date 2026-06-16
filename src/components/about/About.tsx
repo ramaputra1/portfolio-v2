@@ -56,11 +56,18 @@ export async function About() {
         }}
       />
       <Section id="about">
-        <SectionHeader label="ABOUT ME" title="Get to know me better" />
+        <SectionHeader label="ABOUT ME" title="Get to Know Me Better" />
 
         {/* Profile photo + bio */}
         <div className="mt-12 flex flex-col items-center gap-8 sm:flex-row sm:items-start">
-          <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full ring-2 ring-border-light">
+          <div
+            className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full"
+            style={{
+              border: "1.5px solid rgba(99,102,241,0.5)",
+              boxShadow:
+                "0 0 20px rgba(99,102,241,0.25), 0 0 40px rgba(99,102,241,0.12), inset 0 0 16px rgba(99,102,241,0.08)",
+            }}
+          >
             <Image
               src="/images/profile.png"
               alt="Rama Putra"

@@ -20,7 +20,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="space-gradient relative min-h-svh overflow-hidden sm:pt-16"
+      className="space-gradient relative min-h-svh overflow-hidden pt-16"
     >
       {/* Stars */}
       <div aria-hidden="true" className="absolute inset-0">
@@ -55,7 +55,7 @@ export function Hero() {
       />
 
       {/* Left-column text content */}
-      <div className="pointer-events-none relative z-10 mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl items-start px-4 py-10 sm:px-6 sm:py-14 md:items-center md:py-20">
+      <div className="pointer-events-none relative z-10 mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl items-start px-4 py-8 sm:px-6 sm:py-14 md:items-center md:py-20">
         {/* Desktop scrim so text stays readable over the globe */}
         <div
           className="pointer-events-none absolute inset-y-0 left-0 hidden w-2/3 sm:block md:w-2/3"
@@ -66,7 +66,7 @@ export function Hero() {
         />
 
         {/* pointer-events-auto only on the actual text/buttons column */}
-        <div className="pointer-events-auto relative flex max-w-[34rem] min-w-0 flex-col items-start pt-8 sm:pt-10 md:-translate-x-4 md:pt-0 lg:-translate-x-8">
+        <div className="pointer-events-auto relative flex max-w-[34rem] min-w-0 flex-col items-start pt-10 sm:pt-12 md:-translate-x-4 md:pt-0 lg:-translate-x-8">
           <h1 className="relative text-4xl font-bold tracking-normal sm:text-5xl md:text-7xl" style={{ color: "#a5b4fc" }}>
             <span
               aria-hidden="true"
@@ -81,7 +81,7 @@ export function Hero() {
             Rama Putra
           </h1>
           <p
-            className="shimmer-text mt-2 max-w-full bg-clip-text text-3xl font-bold tracking-normal text-balance text-transparent sm:text-5xl md:text-5xl"
+            className="shimmer-text mt-3 max-w-full bg-clip-text text-2xl font-bold tracking-normal text-balance text-transparent sm:text-4xl md:text-5xl"
             style={{
               backgroundImage: "linear-gradient(90deg,  #6366f1)",
               filter: "drop-shadow(0 0 18px rgba(99,102,241,0.45))",
@@ -89,13 +89,13 @@ export function Hero() {
           >
             Enterprise Full Stack Developer
           </p>
-          <p className="mt-6 max-w-md text-base leading-7 text-text sm:text-lg">
+          <p className="mt-8 max-w-md text-base leading-7 text-text sm:mt-6 sm:text-lg">
             Build a full-stack Software and Automated solutions. Experienced in
             Enterprise Systems serving 3,500+ users. Turn ideas to reality
             through code.
           </p>
 
-          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+          <div className="mt-10 flex w-full flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row">
             <a
               href="#contact"
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-indigo-500/50 bg-[rgba(19,25,60,0.92)] px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-indigo-200 shadow-[0_4px_20px_rgba(99,102,241,0.15)] transition-all duration-300 hover:border-indigo-500/80 hover:bg-[rgba(25,32,75,0.97)] hover:shadow-[0_8px_32px_rgba(99,102,241,0.35),0_0_0_1px_rgba(99,102,241,0.2)] sm:w-auto"
@@ -110,7 +110,7 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 sm:mt-8">
             {socials.map(({ label, href, icon: Icon }) => (
               <IconLink
                 key={label}

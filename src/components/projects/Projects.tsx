@@ -39,7 +39,7 @@ export function Projects() {
         }}
       />
       <Section id="projects">
-        <SectionHeader label="PROJECTS" title="Things I've built" />
+        <SectionHeader label="PROJECTS" title="Things I Have Built" />
         <ProjectCarousel projects={projects} />
       </Section>
     </div>

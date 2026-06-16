@@ -188,7 +188,9 @@ export function ProjectModal({ project, onClose }: Props) {
                     </a>
                   )}
                   {!hasLive && !hasGithub && (
-                    <span className="text-xs italic text-text-muted">Coming soon</span>
+                    <span className="text-xs italic text-text-muted">
+                      {project.title === "Coming Soon" ? "Coming soon" : "Not Applicable"}
+                    </span>
                   )}
                 </div>
               </div>
