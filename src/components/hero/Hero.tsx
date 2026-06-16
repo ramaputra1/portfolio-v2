@@ -39,7 +39,10 @@ export function Hero() {
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-[30vh]"
-        style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(10,15,30,0.75) 100%)" }}
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent 0%, rgba(10,15,30,0.75) 100%)",
+        }}
       />
 
       {/* Mobile-only dark scrim — globe bleeds fully behind text on small screens */}
@@ -64,14 +67,22 @@ export function Hero() {
 
         {/* pointer-events-auto only on the actual text/buttons column */}
         <div className="pointer-events-auto relative flex max-w-[34rem] min-w-0 flex-col items-start pt-8 sm:pt-10 md:-translate-x-4 md:pt-0 lg:-translate-x-8">
-          <h1 className="text-4xl font-bold tracking-normal text-text sm:text-5xl md:text-7xl">
-            Rama Putra
+          <h1 className="text-4xl font-bold tracking-normal sm:text-5xl md:text-7xl">
+            <span
+              className="shimmer-text bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(120deg, #c7d2fe, #a5b4fc, #818cf8, #c7d2fe)",
+              }}
+            >
+              Rama Putra
+            </span>
           </h1>
           <p
             className="shimmer-text mt-2 max-w-full bg-clip-text text-3xl font-bold tracking-normal text-balance text-transparent sm:text-5xl md:text-5xl"
             style={{
-              backgroundImage:
-                "linear-gradient(90deg, #22d3ee, #3b82f6, #6366f1, #8b5cf6, #22d3ee)",
+              backgroundImage: "linear-gradient(90deg,  #6366f1)",
+              filter: "drop-shadow(0 0 18px rgba(99,102,241,0.45))",
             }}
           >
             Enterprise Full Stack Developer
