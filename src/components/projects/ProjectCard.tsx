@@ -99,6 +99,15 @@ export function ProjectCard({
           {project.description}
         </p>
 
+        {/* Tech icons */}
+        {project.tags.filter(t => t !== "Coming Soon").length > 0 && (
+          <div className="flex flex-wrap items-center gap-2">
+            {project.tags.filter(t => t !== "Coming Soon").map((tag) => (
+              <TagItem key={tag} tag={tag} />
+            ))}
+          </div>
+        )}
+
         {/* Links — stop propagation so clicks don't open modal */}
         <div
           className="flex items-center gap-5 border-t border-border pt-3"
