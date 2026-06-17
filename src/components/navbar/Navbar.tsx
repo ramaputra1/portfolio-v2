@@ -67,12 +67,12 @@ export function Navbar() {
             ))}
           </div>
           <Button
-            href="/cv.pdf"
+            href="/RamaPutra-Resume.pdf"
             download
             variant="outline"
             icon={<Download size={16} />}
           >
-            Download CV
+            Download Resume
           </Button>
         </div>
 
@@ -107,14 +107,14 @@ export function Navbar() {
             </a>
           ))}
           <Button
-            href="/cv.pdf"
+            href="/RamaPutra-Resume.pdf"
             download
             variant="outline"
             icon={<Download size={16} />}
             className="justify-center"
             onClick={closeMenu}
           >
-            Download CV
+            Download Resume
           </Button>
         </div>
       </div>

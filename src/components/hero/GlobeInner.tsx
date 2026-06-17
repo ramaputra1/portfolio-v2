@@ -33,7 +33,7 @@ const LOCATIONS = [
     lat: 21.645,
     lng: -157.9255,
     city: "Hawaii",
-    desc: "Currently Studying College in Hawaii.",
+    desc: "Currently Studying in College in Hawaii.",
     mapsUrl: "https://maps.google.com/?q=Brigham+Young+University+Hawaii",
   },
 ];

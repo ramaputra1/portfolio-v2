@@ -56,7 +56,7 @@ export async function About() {
         }}
       />
       <Section id="about">
-        <SectionHeader label="ABOUT ME" title="Get to Know Me Better" />
+        <SectionHeader label="ABOUT ME" title="A Little More About Me" />
 
         {/* Profile photo + bio */}
         <div className="mt-12 flex flex-col items-center gap-8 sm:flex-row sm:items-start">
