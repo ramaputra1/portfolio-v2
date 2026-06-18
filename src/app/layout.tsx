@@ -32,6 +32,10 @@ export const metadata: Metadata = {
   title: "Rama Putra - Full Stack Developer",
   description:
     "Computer Science student at BYU-Hawaii building scalable web applications with clean code.",
+  icons: {
+    icon: "/images/logo-ramaap.png",
+    apple: "/images/logo-ramaap.png",
+  },
   openGraph: {
     title: "Rama Putra - Full Stack Developer",
     description:

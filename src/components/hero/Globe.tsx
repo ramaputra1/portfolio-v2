@@ -17,31 +17,6 @@ const GlobeInner = dynamic(() => import("./GlobeInner"), {
 
 const LETTERS = "Hello World".split("");
 
-const COLORS = [
-  "#3b82f6", // Blue
-  "#06b6d4", // Cyan
-  // "#14b8a6", // Teal
-  // "#22c55e", // Green
-  // "#84cc16", // Lime
-  "#eab308", // Yellow
-  // "#f59e0b", // Amber
-  // "#f97316", // Orange
-  "#ef4444", // Red
-  "#ec4899", // Pink
-  "#a855f7", // Purple
-];
-function build3DShadow(color: string) {
-  const depth = 7;
-  const shadows: string[] = [];
-  for (let i = 1; i <= depth; i++) {
-    shadows.push(`${i}px ${i + 1}px 0 ${color}`);
-  }
-  // Layered backlight — bleeds behind each letter like colored light
-  shadows.push(`0 0 18px ${color}cc`);
-  shadows.push(`0 0 45px ${color}88`);
-  shadows.push(`0 0 80px ${color}50`);
-  return shadows.join(", ");
-}
 
 const REPEL_RADIUS = 140; // px — wider zone = more sensitive
 const REPEL_STRENGTH = 22; // px — hard ceiling on vertical displacement
@@ -74,14 +49,6 @@ function HelloWorldRipple({
     LETTERS.map(() => null),
   );
 
-  const [colorIndex, setColorIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setColorIndex((i) => (i + 1) % COLORS.length);
-    }, 3000);
-    return () => clearInterval(id);
-  }, []);
 
   // motionValue is a plain function (not a hook) — safe in useState lazy init
   const [mv] = useState<{ x: MotionValue<number>; y: MotionValue<number> }[]>(
@@ -151,9 +118,9 @@ function HelloWorldRipple({
           ? "clamp(0.95rem, 4.5vw, 1.2rem)"
           : "clamp(2rem, 4.5vw, 3.8rem)",
         opacity,
-        color: "#ffffff",
-        textShadow: build3DShadow(COLORS[colorIndex]),
-        transition: "opacity 3s ease, text-shadow 1s ease",
+        color: "#a5b4fc",
+        filter: "drop-shadow(0 0 18px rgba(99,102,241,0.5))",
+        transition: "opacity 3s ease",
         padding: isCompact ? "0.45rem" : "1.5rem",
       }}
       onMouseMove={handleMouseMove}
