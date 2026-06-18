@@ -76,7 +76,9 @@ export async function About() {
               priority
             />
           </div>
-          <p className="text-base leading-7 text-text-muted sm:pt-2">{bio}</p>
+          <p className="whitespace-pre-line text-base leading-7 text-text-muted sm:pt-2">
+            {bio}
+          </p>
         </div>
 
         {/* Card grid */}

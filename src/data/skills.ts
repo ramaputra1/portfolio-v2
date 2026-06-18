@@ -1,7 +1,12 @@
 import type { InfoBlock, TechItem } from "@/types";
 
-export const bio =
-  "Hello World! I am Rama Adi Putra, I was born and raised in Surakarta, Indonesia. Currently, I am doing my study in BYU-Hawaii University since Winter 2024. I planned to finish my study in 4 years. I am majoring in Computer Science, minoring in Visual Art & Marketing. Formed by my B.S. and Certificate, I specialize as a Website App Fullstack Developer, expertise in designing websites, optimizing UX/UI, and strategically marketing website & digital products to the market. I am a lifetime learner with a passion to exploring the creative side of technology. I am looking for any oportunity to collabs with everyone in purpose to create a creative technology or projects in programming field.";
+export const bio = `Hey World! I'm Rama Adi Putra, I'm from Surakarta, Indonesia. I am currently pursuing a Bachelor's degree in Computer Science at Brigham Young University–Hawaii, with an expected graduation date in 2027.
+
+While I'm studying, I work as a student Enterprise Systems Software Developer for the university. In there, it gave me special opportunity hands-on experience in building and maintaining real-world enterprise applications. Through this experience, I have learned best practices for software architecture, code organization, maintainability, technology selection based on project requirements, budget management, development and production environment management, teamwork, and many other essential aspects of professional software development. Working on enterprise systems has allowed me to expand my skills beyond simply building applications. It has helped me develop a deeper understanding of how technology can effectively solve business problems, especially in today's AI era.
+ 
+What make me stands out in this AI era? It's my combination of practical enterprise experience and AI expertise. I don't just know how to use AI to create applications, but I know how to leverage AI to build and maintainance solutions that follow the field best practices. I understand how to select the right technologies, meet user needs, work within project budgets & timeframe, and deliver solutions to the end business goals.
+ 
+If you're looking for someone with real-world enterprise software experience who can effectively use AI to enhance your business and technology area, Chat Me!`;
 
 export const education: InfoBlock = {
   primary: "Brigham Young University-Hawaii",

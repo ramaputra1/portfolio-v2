@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Download, Menu, X } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
@@ -46,11 +47,15 @@ export function Navbar() {
         className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6"
       >
         <a href="#" className="flex items-center gap-3" onClick={closeMenu}>
-          <span className="grid size-9 place-items-center rounded-full border border-border-light bg-bg-elevated text-sm font-semibold text-text">
-            RP
-          </span>
+          <Image
+            src="/images/logo-ramaap.png"
+            alt="RamaAP logo"
+            width={36}
+            height={36}
+            className="rounded-full"
+          />
           <span className="text-sm font-semibold text-text sm:text-base">
-            Rama Putra
+            RamaAP
           </span>
         </a>
 

@@ -67,7 +67,10 @@ export function Hero() {
 
         {/* pointer-events-auto only on the actual text/buttons column */}
         <div className="pointer-events-auto relative flex max-w-[34rem] min-w-0 flex-col items-start pt-10 sm:pt-12 md:-translate-x-4 md:pt-0 lg:-translate-x-8">
-          <h1 className="relative text-4xl font-bold tracking-normal sm:text-5xl md:text-7xl" style={{ color: "#a5b4fc" }}>
+          <h1
+            className="relative text-4xl font-bold tracking-normal sm:text-5xl md:text-7xl"
+            style={{ color: "#a5b4fc" }}
+          >
             <span
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 -z-10"
@@ -78,7 +81,7 @@ export function Hero() {
                 transform: "scale(1.3)",
               }}
             />
-            Rama Putra
+            Rama A. Putra
           </h1>
           <p
             className="shimmer-text mt-3 max-w-full bg-clip-text text-2xl font-bold tracking-normal text-balance text-transparent sm:text-4xl md:text-5xl"
