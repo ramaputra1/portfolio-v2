@@ -12,7 +12,20 @@ import {
 
 const GlobeInner = dynamic(() => import("./GlobeInner"), {
   ssr: false,
-  loading: () => null,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center">
+      <div
+        className="rounded-full"
+        style={{
+          width: "min(50vw, 400px)",
+          height: "min(50vw, 400px)",
+          background:
+            "radial-gradient(circle at 35% 35%, rgba(59,130,246,0.15), rgba(10,15,30,0.4) 70%)",
+          animation: "pulse 2s ease-in-out infinite",
+        }}
+      />
+    </div>
+  ),
 });
 
 const LETTERS = "Hello World".split("");
