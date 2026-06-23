@@ -54,6 +54,10 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${caveat.variable} ${pacifico.variable} ${poppins.variable}`}
     >
+      <head>
+        <link rel="preload" href="/globe/earth-blue-marble.jpg" as="image" />
+        <link rel="preload" href="/globe/earth-topology.png" as="image" />
+      </head>
       <body className="antialiased" suppressHydrationWarning>
         {children}
       </body>

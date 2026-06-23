@@ -8,7 +8,7 @@ export const projects: Project[] = [
     title: "BYU-Hawaii New Style Design",
     description:
       "A restyled BYU-Hawaii website with different colors, icons and logos — built purely for layout and web-design practice.",
-    image: "/images/byuhdesign.png",
+    image: "/images/byuhdesign.webp",
     tags: ["HTML", "CSS"],
     type: "Design",
     date: "2024-05-01",
@@ -19,7 +19,7 @@ export const projects: Project[] = [
     title: "Superstition",
     description:
       "An Indonesian-language site dedicated to sharing global superstitions and cultural beliefs, with a dynamic user-submission form using AJAX and JSON.",
-    image: "/images/superstition.png",
+    image: "/images/superstition.webp",
     tags: ["HTML", "CSS", "Javascript"],
     type: "Web App",
     date: "2024-08-15",
@@ -30,7 +30,7 @@ export const projects: Project[] = [
     title: "Air Quality Index Check",
     description:
       "Real-time AQI checker for any city using the OpenWeatherApp API — promoting awareness of environmental health.",
-    image: "/images/air-quality.png",
+    image: "/images/air-quality.webp",
     tags: ["HTML", "Tailwind CSS", "Javascript"],
     type: "Tool",
     date: "2024-10-20",
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     title: "Coming Soon",
     description:
       "A new project is in progress and will be added to the portfolio soon.",
-    image: "/images/project-soon.png",
+    image: "/images/project-soon.webp",
     tags: ["Coming Soon"],
     type: "Web App",
     date: "2025-03-01",
@@ -52,7 +52,7 @@ export const projects: Project[] = [
   // {
   //   title: "Coming Soon",
   //   description: "Another project currently in development. Stay tuned.",
-  //   image: "/images/project-soon.png",
+  //   image: "/images/project-soon.webp",
   //   tags: ["Coming Soon"],
   //   type: "Tool",
   //   date: "2025-05-01",
@@ -62,7 +62,7 @@ export const projects: Project[] = [
   // {
   //   title: "Coming Soon",
   //   description: "More exciting work is on the way. Check back soon!",
-  //   image: "/images/project-soon.png",
+  //   image: "/images/project-soon.webp",
   //   tags: ["Coming Soon"],
   //   type: "Web App",
   //   date: "2025-06-01",
@@ -72,7 +72,7 @@ export const projects: Project[] = [
   // {
   //   title: "Coming Soon",
   //   description: "A project is being planned and will be revealed shortly.",
-  //   image: "/images/project-soon.png",
+  //   image: "/images/project-soon.webp",
   //   tags: ["Coming Soon"],
   //   type: "Design",
   //   date: "2025-07-01",
@@ -82,7 +82,7 @@ export const projects: Project[] = [
   // {
   //   title: "Coming Soon",
   //   description: "Something new is being built. Stay tuned for updates.",
-  //   image: "/images/project-soon.png",
+  //   image: "/images/project-soon.webp",
   //   tags: ["Coming Soon"],
   //   type: "Tool",
   //   date: "2025-08-01",
@@ -92,7 +92,7 @@ export const projects: Project[] = [
   // {
   //   title: "Coming Soon",
   //   description: "An upcoming project that will push the boundaries of design and code.",
-  //   image: "/images/project-soon.png",
+  //   image: "/images/project-soon.webp",
   //   tags: ["Coming Soon"],
   //   type: "Web App",
   //   date: "2025-09-01",
@@ -102,7 +102,7 @@ export const projects: Project[] = [
   // {
   //   title: "Coming Soon",
   //   description: "A fresh idea currently in early development. Details coming soon.",
-  //   image: "/images/project-soon.png",
+  //   image: "/images/project-soon.webp",
   //   tags: ["Coming Soon"],
   //   type: "Design",
   //   date: "2025-10-01",
@@ -112,7 +112,7 @@ export const projects: Project[] = [
   // {
   //   title: "Coming Soon",
   //   description: "Another exciting tool is in the works. Watch this space.",
-  //   image: "/images/project-soon.png",
+  //   image: "/images/project-soon.webp",
   //   tags: ["Coming Soon"],
   //   type: "Tool",
   //   date: "2025-11-01",
@@ -122,7 +122,7 @@ export const projects: Project[] = [
   // {
   //   title: "Coming Soon",
   //   description: "The latest project is taking shape. More info will be shared soon.",
-  //   image: "/images/project-soon.png",
+  //   image: "/images/project-soon.webp",
   //   tags: ["Coming Soon"],
   //   type: "Web App",
   //   date: "2025-12-01",

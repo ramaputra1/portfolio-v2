@@ -48,7 +48,7 @@ export function Navbar() {
       >
         <a href="#" className="flex items-center gap-3" onClick={closeMenu}>
           <Image
-            src="/images/logo-ramaap.png"
+            src="/images/logo-ramaap.webp"
             alt="RamaAP logo"
             width={36}
             height={36}
