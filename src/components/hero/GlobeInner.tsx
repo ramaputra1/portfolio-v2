@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 import * as THREE from "three";
 
-const CLOUDS_URL = "//unpkg.com/three-globe/example/img/earth-clouds.png";
 const ALTITUDE = 1.75;
 
 interface GlobeControls {
@@ -136,7 +135,6 @@ interface Props {
 
 export default function GlobeInner({ width, height, reducedMotion }: Props) {
   const globeRef = useRef<GlobeMethods | undefined>(undefined);
-  const cloudsRafRef = useRef<number>(0);
   const reducedMotionRef = useRef(reducedMotion);
 
   const [htmlData] = useState(() =>
@@ -161,8 +159,6 @@ export default function GlobeInner({ width, height, reducedMotion }: Props) {
     lockZoom(globe);
   }, [width, height]);
 
-  useEffect(() => () => cancelAnimationFrame(cloudsRafRef.current), []);
-
   const handleGlobeReady = useCallback(() => {
     const globe = globeRef.current as GlobeExt | undefined;
     if (!globe) return;
@@ -181,30 +177,6 @@ export default function GlobeInner({ width, height, reducedMotion }: Props) {
     // post-ready setup overwrites enableZoom / min/maxDistance.
     lockZoom(globe);
     requestAnimationFrame(() => lockZoom(globe));
-
-    new THREE.TextureLoader().load(CLOUDS_URL, (texture: THREE.Texture) => {
-      const radius = (globe.getGlobeRadius?.() ?? 100) * 1.007;
-      const clouds = new THREE.Mesh(
-        new THREE.SphereGeometry(radius, 75, 75),
-        new THREE.MeshPhongMaterial({
-          map: texture,
-          transparent: true,
-          opacity: 0.95,
-          depthWrite: false,
-          emissive: new THREE.Color(0x223344),
-          emissiveIntensity: 0.15,
-        }),
-      );
-      (globe.scene() as THREE.Scene).add(clouds);
-
-      if (!rm) {
-        const rotateClouds = () => {
-          clouds.rotation.y += 0.00012;
-          cloudsRafRef.current = requestAnimationFrame(rotateClouds);
-        };
-        cloudsRafRef.current = requestAnimationFrame(rotateClouds);
-      }
-    });
   }, []); // stable — reads reducedMotion via ref
 
   return (
@@ -214,8 +186,8 @@ export default function GlobeInner({ width, height, reducedMotion }: Props) {
       height={height}
       rendererConfig={{ alpha: true, antialias: true }}
       backgroundColor="rgba(0,0,0,0)"
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-      bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+      globeImageUrl="/globe/earth-blue-marble.jpg"
+      bumpImageUrl="/globe/earth-topology.png"
       atmosphereColor="#3b82f6"
       atmosphereAltitude={0.15}
       htmlElementsData={htmlData}

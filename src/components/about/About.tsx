@@ -69,7 +69,7 @@ export async function About() {
             }}
           >
             <Image
-              src="/images/profile.png"
+              src="/images/profile.webp"
               alt="Rama Putra"
               fill
               className="object-cover scale-125 translate-y-2.5"
