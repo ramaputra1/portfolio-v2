@@ -7,7 +7,7 @@ export const projects: Project[] = [
   {
     title: "BYU-Hawaii New Style Design",
     description:
-      "A restyled BYU-Hawaii website with different colors, icons and logos — built purely for layout and web-design practice.",
+      "Personal Project: A restyled BYU-Hawaii website with different colors, icons and logos — built purely for layout and web-design practice.",
     image: "/images/byuhdesign.webp",
     tags: ["HTML", "CSS"],
     type: "Design",
@@ -18,7 +18,7 @@ export const projects: Project[] = [
   {
     title: "Superstition",
     description:
-      "An Indonesian-language site dedicated to sharing global superstitions and cultural beliefs, with a dynamic user-submission form using AJAX and JSON.",
+      "An Indonesian-language site dedicated to sharing global superstitions and cultural beliefs, with a dynamic user-submission form using AJAX and JSON. Vanilla HTML, CSS, and JavaScript were used to create a responsive and interactive experience, use Vanilla to strengthen basic fundamentals for web development.",
     image: "/images/superstition.webp",
     tags: ["HTML", "CSS", "Javascript"],
     type: "Web App",
@@ -29,7 +29,7 @@ export const projects: Project[] = [
   {
     title: "Air Quality Index Check",
     description:
-      "Real-time AQI checker for any city using the OpenWeatherApp API — promoting awareness of environmental health.",
+      "Real-time AQI checker for any city using the OpenWeatherApp API — promoting awareness of environmental health. Implementing how to use public APIs, JSON data parsing, and dynamic content rendering. Styled with modern Tailwind CSS.",
     image: "/images/air-quality.webp",
     tags: ["HTML", "Tailwind CSS", "Javascript"],
     type: "Tool",
@@ -39,26 +39,27 @@ export const projects: Project[] = [
   },
   // ── Placeholders — replace with real projects as they're ready ──
   {
-    title: "Coming Soon",
+    title: "Multi-DB Integration Dashboard",
     description:
-      "A new project is in progress and will be added to the portfolio soon.",
-    image: "/images/project-soon.webp",
-    tags: ["Coming Soon"],
-    type: "Web App",
+      "Team Project: Developed during my time as a Student Developer at Brigham Young University-Hawaii. Built to present and manage large-scale data, structured UI with filtering, data tables, and export features (Excel/CSV). The system integrates data from 3 separate databases: Sunapsis, Oracle, and MySQL, through custom query pipelines, then displays them in a dashboard for easier analysis and reporting, also implementing REST APIs. Developed with React and Vite for FE, the application can process and render up to 15,000 records in under 13 seconds through our backend service.",
+    image: "/images/private-repo.webp",
+    tags: ["React", "Vite", ".NET", "Oracle", "MySQL", "Sunapsis"],
+    type: "Internal Enterprise Web App",
     date: "2025-03-01",
     liveUrl: "#",
     githubUrl: "#",
   },
-  // {
-  //   title: "Coming Soon",
-  //   description: "Another project currently in development. Stay tuned.",
-  //   image: "/images/project-soon.webp",
-  //   tags: ["Coming Soon"],
-  //   type: "Tool",
-  //   date: "2025-05-01",
-  //   liveUrl: "#",
-  //   githubUrl: "#",
-  // },
+  {
+    title: "Internal Ticket Management System",
+    description:
+      "Team Project: Developed during my time as a Student Developer at Brigham Young University-Hawaii. An internal web application built to manage ticket operations and track activities, with an emphasis on budget tracking. The system integrates with public APIs and our own REST APIs to handle ticketing workflows through custom tables, automated email notifications, and real-time status updates. It also supports custom note management and detailed tracking of ticket-related financial records and operational activities.",
+    image: "/images/private-repo.webp",
+    tags: [".NET", "MySQL", "Mendix", "TeamDynamix"],
+    type: "Internal Enterprise Web App",
+    date: "2025-03-01",
+    liveUrl: "#",
+    githubUrl: "#",
+  },
   // {
   //   title: "Coming Soon",
   //   description: "More exciting work is on the way. Check back soon!",
