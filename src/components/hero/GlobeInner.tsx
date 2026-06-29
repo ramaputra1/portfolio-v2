@@ -21,16 +21,16 @@ type GlobeExt = GlobeMethods & { getGlobeRadius?: () => number };
 const LOCATIONS = [
   {
     id: "surakarta",
-    lat: -7.5755,
-    lng: 110.8243,
+    lat: -6.6706,
+    lng: 111.0091,
     city: "Indonesia",
     desc: "Originally from Indonesia.",
     mapsUrl: "https://maps.google.com/?q=Surakarta,Indonesia",
   },
   {
     id: "laie",
-    lat: 21.645,
-    lng: -157.9255,
+    lat: 22.6414,
+    lng: -157.9263,
     city: "Hawaii",
     desc: "Currently Studying in College in Hawaii.",
     mapsUrl: "https://maps.google.com/?q=Brigham+Young+University+Hawaii",
