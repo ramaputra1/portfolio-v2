@@ -42,7 +42,7 @@ export const projects: Project[] = [
     title: "Multi-DB Integration Dashboard",
     description:
       "Team Project: Developed during my time as a Student Developer at Brigham Young University-Hawaii. Built to present and manage large-scale data, structured UI with filtering, data tables, and export features (Excel/CSV). The system integrates data from 3 separate databases: Sunapsis, Oracle, and MySQL, through custom query pipelines, then displays them in a dashboard for easier analysis and reporting, also implementing REST APIs. Developed with React and Vite for FE, the application can process and render up to 15,000 records in under 13 seconds through our backend service.",
-    image: "/images/private-repo-image.webp",
+    image: "/images/private-repo.webp",
     tags: ["React", "Vite", ".NET", "Oracle", "MySQL", "Sunapsis"],
     type: "Internal Enterprise Web App",
     date: "2025-03-01",
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     title: "Internal Ticket Management System",
     description:
       "Team Project: Developed during my time as a Student Developer at Brigham Young University-Hawaii. An internal web application built to manage ticket operations and track activities, with an emphasis on budget tracking. The system integrates with public APIs and our own REST APIs to handle ticketing workflows through custom tables, automated email notifications, and real-time status updates. It also supports custom note management and detailed tracking of ticket-related financial records and operational activities.",
-    image: "/images/private-repo-image.webp",
+    image: "/images/private-repo.webp",
     tags: [".NET", "MySQL", "Mendix", "TeamDynamix"],
     type: "Internal Enterprise Web App",
     date: "2025-03-01",
