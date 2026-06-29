@@ -26,6 +26,8 @@ const TAG_ICONS: Record<string, string> = {
   "C#":           "/icons/csharp.svg",
   ".NET":         "/icons/dotnet.svg",
   "MongoDB":      "/icons/mongodb.svg",
+  "Vite":         "/icons/vitejs.svg",
+  "Oracle":       "/icons/oracle.svg",
 };
 
 interface Props {
